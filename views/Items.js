@@ -1,15 +1,11 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, Text, Button} from 'react-native';
+import {StyleSheet, SafeAreaView, Text} from 'react-native';
 import PropTypes from 'prop-types';
 
-const Home = ({navigation}) => {
+const Items = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Home</Text>
-            <Button title="Item list" onPress={() =>
-                navigation.navigate('Items')
-            }
-            />
+            <Text>Items</Text>
         </SafeAreaView>
     );
 };
@@ -24,8 +20,8 @@ const styles = StyleSheet.create({
     },
 });
 
-Home.propTypes = {
-    navigation: PropTypes.object,
+Items.propTypes = {
+    route: PropTypes.object,
 };
 
-export default Home;
+export default Items;

@@ -2,10 +2,11 @@ import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {AuthContext} from '../contexts/AuthContext';
 import Home from '../views/Home';
 import HomeAdmin from '../views/HomeAdmin';
 import Login from '../views/Login';
-import {AuthContext} from '../contexts/AuthContext';
+import Items from '../views/Items';
 
 
 const Tab = createBottomTabNavigator();
@@ -27,6 +28,7 @@ const StackScreen = () => {
             {isLoggedIn ? (
                 <>
                     <Stack.Screen name="Home" component={TabScreen} />
+                    <Stack.Screen name="Items" component={Items} />
                 </>
             ) : (
                 <>
