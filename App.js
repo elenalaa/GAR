@@ -4,6 +4,8 @@ import Navigator from './navigators/Navigator';
 
 
 
+
+
 const App = () => {
   return (
     <AuthProvider>
