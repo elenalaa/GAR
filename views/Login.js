@@ -1,30 +1,42 @@
-import React, {useState, useContext} from "react";
+import React, {useEffect, useContext} from "react";
 import {AuthContext} from '../contexts/AuthContext';
 import PropTypes from 'prop-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RegisterForm from '../components/RegisterForm';
+import LogInForm from '../components/LoginForm';
 import {
     StyleSheet,
     View,
-    Text,
-    Button,
+    Text
 } from 'react-native';
 
 
-const Login = (props) => { // props is needed for navigation
-    const [isLoggedIn, setIsLoggedIn] = useContext(AuthContext);
-    console.log('ili', isLoggedIn);
-    const logIn = () => {
-        setIsLoggedIn(true);
-        if (isLoggedIn) {  // this is to make sure isLoggedIn has changed, will be removed later
-            props.navigation.navigate('Home');
+
+const Login = ({navigation}) => {
+    const {setUser, isLoggedIn, user, setIsLoggedIn} = useContext(AuthContext);
+    //console.log('ollaanko logged in? ', isLoggedIn);
+
+    const getToken = async () => {
+        const userToken = await AsyncStorage.getItem('userToken');
+        console.log('Saako getToken oikeen tokenin? ', userToken);
+        if (userToken) {
+            setIsLoggedIn(true);
         }
     };
+    useEffect(() => {
+        getToken();
+    }, []);
+
+
     return (
         <View style={styles.container}>
-            <Text>Login</Text>
-            <Button title="Sign in!" onPress={logIn} />
+            <Text>Login!</Text>
+            <LogInForm navigation={navigation} />
+            <RegisterForm navigation={navigation} />
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {

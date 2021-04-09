@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, SafeAreaView, Text, Button} from 'react-native';
 import PropTypes from 'prop-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AuthContext} from '../contexts/AuthContext';
+
 
 const Home = ({navigation}) => {
+
+    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
+
+    const logout = async () => {
+        setIsLoggedIn(false);
+        await AsyncStorage.clear();
+        navigation.navigate('Login');
+    };
+
+
     return (
         <SafeAreaView style={styles.container}>
             <Text>Home</Text>
@@ -10,6 +23,8 @@ const Home = ({navigation}) => {
                 navigation.navigate('Items')
             }
             />
+            <Text>Log out</Text>
+            <Button title={'Logout'} onPress={logout} />
         </SafeAreaView>
     );
 };
