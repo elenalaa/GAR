@@ -8,7 +8,7 @@ const Home = ({navigation}) => {
             <Text>Home</Text>
             <Button title="Item list" onPress={() =>
                 navigation.navigate('Items')
-            }
+            } style={styles.button}
             />
         </SafeAreaView>
     );
@@ -21,6 +21,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 40,
+    },
+
+    button: {
+        paddingHorizontal: 20,
+        paddingVertical: 6,
+        borderRadius: 10,
+        marginHorizontal: "1%",
+        marginBottom: 6,
+        minWidth: "48%",
+        textAlign: "center",
     },
 });
 
