@@ -77,7 +77,7 @@ const useAddItemForm = (useCallback) => {
           constraints
         );
         const amountError = validator('amount', inputs.amount, constraints);
-        const codeError = validator('city', inputs.code, constraints); 
+        const codeError = validator('code', inputs.code, constraints); 
     
         if (
           titleError !== null ||

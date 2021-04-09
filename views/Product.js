@@ -97,10 +97,12 @@ const styles = StyleSheet.create({
    flexDirection: 'row',
    justifyContent: 'space-between',
    paddingVertical: 6,
-   marginHorizontal: "1%",
+   //marginHorizontal: "1%",
    marginBottom: 40,
    minWidth: "48%",
    alignSelf: 'center',
+  
+
   },
 
   listTitle: {
@@ -121,12 +123,13 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    flex: 2,
+   flex: 2,
    textAlign: 'center',
    paddingVertical: 6,
    borderRadius: 10,
-   marginHorizontal: "1%",
-   marginBottom: 6,
+   //marginHorizontal: "1%",
+  // marginBottom: 6,
+  
    
    
   },
