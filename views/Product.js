@@ -17,14 +17,14 @@ const Product = (props) => {
     setDatePickerVisibility(true);
   };
 
-  const hideDatePicker = () => {
+  /* const hideDatePicker = () => {
     setDatePickerVisibility(false);
   }; 
 
   const handleConfirm = (date) => {
     console.warn("A date has been picked: ", date);
     hideDatePicker();
-  };  
+  };   */
 
   
 
@@ -54,7 +54,7 @@ const Product = (props) => {
           title="Borrow"
           onPress={() => Alert.alert('Button pressed')}
           />
-        <Button title="Show Date Picker" onPress={showDatePicker} />
+        {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
         {/*  <DatePicker
          
         date={date}
