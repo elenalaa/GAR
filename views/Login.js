@@ -10,8 +10,6 @@ import {
     Text
 } from 'react-native';
 
-
-
 const Login = ({navigation}) => {
     const {setUser, isLoggedIn, user, setIsLoggedIn} = useContext(AuthContext);
     //console.log('ollaanko logged in? ', isLoggedIn);
@@ -44,6 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        textAlign: 'center',
     },
 });
 

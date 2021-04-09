@@ -8,6 +8,8 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig)
 }
 
+
+
 const App = () => {
   return (
     <AuthProvider>

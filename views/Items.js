@@ -1,13 +1,22 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity,
+    SafeAreaView, Text,} from 'react-native';
 import PropTypes from 'prop-types';
+import List from '../components/List';
+import ListItem from '../components/ListItem';
 
-const Items = () => {
-    return (
-        <SafeAreaView style={styles.container}>
-            <Text>Items</Text>
-        </SafeAreaView>
-    );
+
+
+const Items = (props) => {
+  const {navigation} = props;
+
+  
+  return (
+      <SafeAreaView style={styles.container}>
+        <Text>Items</Text>
+        <List navigation={navigation}></List>
+      </SafeAreaView>
+   );
 };
 
 const styles = StyleSheet.create({
@@ -18,10 +27,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 40,
     },
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+      },
+      title: {
+        fontSize: 32,
+      },
+    
 });
 
 Items.propTypes = {
-    route: PropTypes.object,
+   route: PropTypes.object,
 };
 
+    
 export default Items;
