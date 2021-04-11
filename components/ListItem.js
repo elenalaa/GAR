@@ -8,7 +8,8 @@ import { StyleSheet, Text, TouchableOpacity, View, Image,  } from 'react-native'
   Button,
   Icon,
 } from 'native-base'; */
-import List from './List';
+
+
 
 
 
@@ -31,6 +32,7 @@ const MyListItem= ({ item, navigation}) => {
       <View style={styles.textbox}>
         <Text style={styles.listTitle}>{item.title}</Text>
         <Text>{item.description}</Text>
+        
       </View>
       </View>
     </TouchableOpacity>

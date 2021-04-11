@@ -3,9 +3,9 @@ import { FlatList, TouchableOpacity} from 'react-native';
 //import { ListItem as CoolListItem, Thumbnail, Left, Body } from 'native-base';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
-import Items from '../views/Items';
+//import Items from '../views/Items';
 //import Product from './views/Product';
-
+//import firebase from '../firebase/config.js';
 
 const productArray = [
     {
@@ -37,6 +37,17 @@ const productArray = [
      
     },
   ];
+
+  /* const addItem = (item) => {
+    firebase.firestore().collection('items').add({
+      title: item.title,
+      description: item.description,
+      amount: inputs.amount,
+      code: inputs.code,
+    });
+    Alert.alert('Action!', 'A new To-do item was created');
+
+  } */
   
   const List = ({navigation}) => {
 

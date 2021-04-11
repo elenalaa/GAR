@@ -3,9 +3,6 @@ import {StyleSheet, SafeAreaView, Text, View, Image, Alert, Button, Icon} from '
 import PropTypes from 'prop-types';
 //import { Button } from 'react-native-elements/dist/buttons/Button';
 
-
-
-
 const Product = (props) => {
  const item = props.route.params.item;
 
@@ -25,8 +22,6 @@ const Product = (props) => {
     console.warn("A date has been picked: ", date);
     hideDatePicker();
   };   */
-
-  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -77,7 +72,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     marginVertical: 8,
     marginHorizontal: 16,
-    
   },
   imagebox: {
     flex: 1,
@@ -101,8 +95,6 @@ const styles = StyleSheet.create({
    marginBottom: 40,
    minWidth: "48%",
    alignSelf: 'center',
-  
-
   },
 
   listTitle: {
@@ -113,9 +105,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     textAlign: 'center',
     marginVertical: 8,
-    
-
-  },
+    },
 
   logo: {
     width: 250,
@@ -129,11 +119,7 @@ const styles = StyleSheet.create({
    borderRadius: 10,
    //marginHorizontal: "1%",
   // marginBottom: 6,
-  
-   
-   
   },
-
 });
 
 
