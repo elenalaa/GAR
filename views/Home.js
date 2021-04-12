@@ -10,8 +10,8 @@ const Home = ({navigation}) => {
     const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
 
     const logout = async () => {
-        setIsLoggedIn(false);
         await AsyncStorage.clear();
+        setIsLoggedIn(false);
         navigation.navigate('Login');
     };
 

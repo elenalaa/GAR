@@ -10,10 +10,12 @@ const doLogin = async (userCreds) => {
 
         // Firebase auth getting and returning user info
         const authi = await firebase.auth().signInWithEmailAndPassword(email, password);
-        console.log('apihooks sisäl authi: ', authi)
-
-        //console.log('oks tää nyt oikee?', token);
-        return authi;
+        console.log('apihooks sisäl authi: ', authi);
+        console.log('Mikä tää on: ', authi.operationType);
+        if (authi.operationType == 'signIn') {
+            //console.log('oks tää nyt oikee?', token);
+            return authi;
+        }
 
     } catch (e) {
         console.log(e)
