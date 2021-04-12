@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image,  } from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View, Image, } from 'react-native';
 /* import {
   ListItem,
   Body,
@@ -8,35 +8,34 @@ import { StyleSheet, Text, TouchableOpacity, View, Image,  } from 'react-native'
   Button,
   Icon,
 } from 'native-base'; */
-import List from './List';
 
 
 
-const MyListItem= ({ item, navigation}) => {
+const MyListItem = ({item, navigation}) => {
   //navigation, productArray}) => {
-  
+
   return (
-      <TouchableOpacity  onPress={
+    <TouchableOpacity onPress={
       () => {
         navigation.navigate('Product', {item: item});
       }
-    }>  
-    <View>
-      <View style={styles.imagebox}>
-       <Image
-          style={styles.tinyLogo}
-          source={{uri: item.filename }}
-        /> 
-      </View> 
-      <View style={styles.textbox}>
-        <Text style={styles.listTitle}>{item.title}</Text>
-        <Text>{item.description}</Text>
-      </View>
+    }>
+      <View>
+        <View style={styles.imagebox}>
+          <Image
+            style={styles.tinyLogo}
+            source={{uri: item.filename}}
+          />
+        </View>
+        <View style={styles.textbox}>
+          <Text style={styles.listTitle}>{item.title}</Text>
+          <Text>{item.description}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
 
-  };
+};
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
