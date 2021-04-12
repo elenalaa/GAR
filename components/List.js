@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { FlatList, TouchableOpacity} from 'react-native';
+import {FlatList, TouchableOpacity} from 'react-native';
 //import { ListItem as CoolListItem, Thumbnail, Left, Body } from 'native-base';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
@@ -46,25 +46,24 @@ const productArray = [
   ]; 
   
  
-  
-  const List = ({navigation}) => {
+ const List = ({navigation}) => {
 
-   return (
-      <FlatList
-        data={productArray}
-        keyExtractor={item => item.key}
-        renderItem={({item}) =>
-        <ListItem 
-        navigation={navigation} 
-        item={item} />
+  return (
+    <FlatList
+      data={productArray}
+      keyExtractor={item => item.key}
+      renderItem={({item}) =>
+        <ListItem
+          navigation={navigation}
+          item={item} />
       }
     />
   );
 };
 
 
-  
-          
+
+
 List.propTypes = {
   navigation: PropTypes.object,
   //item:PropTypes.object,

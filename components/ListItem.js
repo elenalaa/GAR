@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image,  } from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View, Image, } from 'react-native';
 /* import {
   ListItem,
   Body,
@@ -9,15 +9,11 @@ import { StyleSheet, Text, TouchableOpacity, View, Image,  } from 'react-native'
   Icon,
 } from 'native-base'; */
 
-
-
-
-
-const MyListItem= ({ item, navigation}) => {
+const MyListItem = ({item, navigation}) => {
   //navigation, productArray}) => {
-  
+
   return (
-      <TouchableOpacity  onPress={
+    <TouchableOpacity onPress={
       () => {
         navigation.navigate('Product', {item: item});
       }
@@ -39,8 +35,8 @@ const MyListItem= ({ item, navigation}) => {
       {/* </View> */}
     </TouchableOpacity>
   );
+};
 
-  };
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
