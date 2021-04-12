@@ -52,7 +52,7 @@ const getToken = async () => {
 
 
 const doAddItem = async(newItem) => {
-    const {title, description} = newItem;
+    const {title, description, amount, code} = newItem;
     
     try {
         const newItem = await firebase.firestore.items

@@ -29,29 +29,19 @@ const AddItem = (props) => {
         amount: inputs.amount,
         code: inputs.code
       };
-
+      
       formData.append('title', inputs.title);
       formData.append('description', inputs.description);
       formData.append('amount', inputs.amount);
       formData.append('code', inputs.code);
-      //discriptionData());
+      
       console.log(data)
       addNewItem(data);
-      //const resp = await postItem(formData, userToken);
-      //console.log('upload', resp);
-
-      /* const postTagResponse = await postTag(
-        {
-          file_id: resp.file_id,
-          tag: 'hрр555',
-        },
-        userToken
-      );
-      console.log('Posting  tag:', postTagResponse); */
- 
+     
       }
       const addNewItem = (item) => {
         firebase.firestore().collection('items').add({
+          
           title: item.title,
           description: item.description,
           amount: item.amount,
