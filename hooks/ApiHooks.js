@@ -52,4 +52,25 @@ const getToken = async () => {
     }
 }
 
-export {doLogin, doRegister, getToken};
+
+const doAddItem = async(newItem) => {
+    const {title, description, amount, code} = newItem;
+    
+    try {
+        const newItem = await firebase.firestore.items
+        console.log('new item added', newItem);
+
+        return newItem;
+
+    } catch (e) {
+        console.log(e)
+    }
+}
+    
+
+
+
+
+  
+
+export {doLogin, doRegister, getToken, doAddItem};

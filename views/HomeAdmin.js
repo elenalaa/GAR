@@ -1,9 +1,18 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, Text, Button} from 'react-native';
+import {StyleSheet, SafeAreaView, Text, Button, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 import AddItem from './AddItem';
+import Calendars from './Calendars';
+import BorrowedItems from './BorrowedItems';
+import WishList from './WishList';
+
+/* const window = Dimensions.get("window");
+const screen = Dimensions.get("screen"); */
+
 
 const HomeAdmin = ({ navigation }) => {
+
+
     return (
         <SafeAreaView style={styles.container}>
             <Text>HomeAdmin</Text>
@@ -11,6 +20,18 @@ const HomeAdmin = ({ navigation }) => {
                 navigation.navigate('AddItem')
             } style={styles.button}
             /> 
+            <Button title="Calendars" onPress={() =>
+                navigation.navigate('Calendars')
+            } style={styles.button}
+            /> 
+             <Button title="Borrowed Items" onPress={() =>
+                navigation.navigate('BorrowedItems')
+            } style={styles.button}
+            /> 
+             <Button title="Wishlist" onPress={() =>
+                navigation.navigate('WishList')
+            } style={styles.button}
+            />
         </SafeAreaView>
     );
 };
@@ -21,17 +42,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 40,
+        padding: 40,
+        
     },
 
     button: {
-        paddingHorizontal: 20,
-        paddingVertical: 6,
+        //paddingHorizontal: 20,
+        //marginVertical: 30,
+        paddingBottom: 20,
         borderRadius: 10,
         marginHorizontal: "1%",
         marginBottom: 6,
-        minWidth: "48%",
+        minWidth: "68%",
         textAlign: "center",
+        justifyContent:'center',
     },
 });
 

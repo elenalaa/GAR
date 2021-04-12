@@ -9,8 +9,6 @@ import {StyleSheet, Text, TouchableOpacity, View, Image, } from 'react-native';
   Icon,
 } from 'native-base'; */
 
-
-
 const MyListItem = ({item, navigation}) => {
   //navigation, productArray}) => {
 
@@ -19,23 +17,26 @@ const MyListItem = ({item, navigation}) => {
       () => {
         navigation.navigate('Product', {item: item});
       }
-    }>
-      <View>
-        <View style={styles.imagebox}>
-          <Image
-            style={styles.tinyLogo}
-            source={{uri: item.filename}}
-          />
-        </View>
-        <View style={styles.textbox}>
-          <Text style={styles.listTitle}>{item.title}</Text>
-          <Text>{item.description}</Text>
-        </View>
+    }>  
+    {/* <View>
+      <View style={styles.imagebox}>
+       <Image
+          style={styles.tinyLogo}
+          source={{uri: item.filename }}
+        /> 
+      </View>  */}
+      <View style={styles.textbox}>
+        <Text style={styles.listTitle}>{item.title}</Text>
+        <Text>{item.description}</Text>
+        <Text>{item.amount}</Text>
+        <Text>{item.code}</Text>
+        
       </View>
+      {/* </View> */}
     </TouchableOpacity>
   );
-
 };
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',

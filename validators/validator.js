@@ -1,4 +1,4 @@
-/*import validate from 'validate.js';
+ import validate from 'validate.js';
 
 const validator = (field, value, constraints) => {
   let object = {};
@@ -16,4 +16,4 @@ const validator = (field, value, constraints) => {
   return null;
 };
 
-export { validator };*/
+export { validator }; 
