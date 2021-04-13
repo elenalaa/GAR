@@ -64,11 +64,5 @@ const doAddItem = async(newItem) => {
         console.log(e)
     }
 }
-    
-
-
-
-
-  
 
 export {doLogin, doRegister, getToken, doAddItem};

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {StyleSheet, 
+import React, { useEffect, useState } from 'react';
+import {StyleSheet, FlatList,
     SafeAreaView, Text, Button, Alert, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 import List from '../components/List';
@@ -45,13 +45,13 @@ const AddItem = (props) => {
           title: item.title,
           description: item.description,
           amount: item.amount,
-          code: item.code
+          code: item.code,
         });
         Alert.alert('Action!', 'A new To-do item was created');
 
       }
 
-  return (
+ return (
     <SafeAreaView style={styles.container}>
       <Text>Add Item</Text>
       {/* <Form style={styles.form}> */}
@@ -93,13 +93,13 @@ const AddItem = (props) => {
          // onPress={() => Alert.alert('Created new item!')}
           onPress={doAddItem}
         />
+        
     </SafeAreaView>
    );
+  }
+    
   
-};
-
-
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
