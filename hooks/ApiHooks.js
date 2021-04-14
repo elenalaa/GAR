@@ -40,6 +40,7 @@ const doRegister = async (userCreds) => {
 }
 
 
+
 const doAddItem = async (newItem) => {
     const {title, description, amount, code} = newItem;
 
@@ -55,6 +56,14 @@ const doAddItem = async (newItem) => {
 }
 
 
+const postItem = async (formData) => {
+    /* const options = {
+        method: 'POST',
+    },
+     data: formData,  */
 
 
-export {doLogin, doRegister, doAddItem};
+
+};
+
+export {doLogin, doRegister, getToken, doAddItem, postItem};
