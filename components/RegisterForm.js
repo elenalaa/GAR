@@ -3,35 +3,27 @@ import PropTypes from 'prop-types';
 import FormTextInput from './FormTextInput';
 import {Button, View} from 'react-native';
 import useSignUpForm from '../hooks/RegisterHooks';
-import {doRegister, getToken} from '../hooks/ApiHooks';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {doRegister} from '../hooks/ApiHooks';
 import {AuthContext} from '../contexts/AuthContext';
 
 
 const RegisterForm = ({navigation}) => {
-    const {isLoggedIn, setIsLoggedIn, setUser} = useContext(AuthContext);
+    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
 
     const registerPress = async () => {
         try {
             // apihooks doRegister tries to make new user and returns it userData
             const newUser = await doRegister(inputs);
             console.log('uus käyttäjä luotu: ', newUser);
-            setUser(newUser);
-
-            //token set & logging in
-            const token = await getToken();
-            await AsyncStorage.setItem('userToken', token);
-            //console.log('register press saa tokenin? : ', token);
-            setIsLoggedIn(true);
-
+            if (newUser) {
+                setIsLoggedIn(true);
+            }
         } catch (e) {
             console.log('login error:', e.message);
         }
     };
 
     const {inputs, handleInputChange} = useSignUpForm();
-
-
     return (
         <View>
             <FormTextInput

@@ -1,7 +1,6 @@
 import React, {useEffect, useContext} from "react";
 import {AuthContext} from '../contexts/AuthContext';
 import PropTypes from 'prop-types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import RegisterForm from '../components/RegisterForm';
 import LogInForm from '../components/LoginForm';
 import {
@@ -9,21 +8,26 @@ import {
     View,
     Text
 } from 'react-native';
+import firebase from 'firebase';
 
 const Login = ({navigation}) => {
-    const {setUser, isLoggedIn, user, setIsLoggedIn} = useContext(AuthContext);
-    //console.log('ollaanko logged in? ', isLoggedIn);
+    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
+
 
     const getToken = async () => {
-        const userToken = await AsyncStorage.getItem('userToken');
 
-        console.log('Saako getToken oikeen tokenin? ', userToken);
-        if (userToken) {
-            setIsLoggedIn(true);
-        }
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log('get token user', user);
+                setIsLoggedIn(true)
+            } else {
+                setIsLoggedIn(false)
+            }
+        });
+
     };
     useEffect(() => {
-        //getToken();
+        getToken();
     }, []);
 
 

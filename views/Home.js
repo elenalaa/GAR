@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {StyleSheet, SafeAreaView, Text, Button} from 'react-native';
 import PropTypes from 'prop-types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AuthContext} from '../contexts/AuthContext';
+import firebase from 'firebase';
 
 
 const Home = ({navigation}) => {
@@ -10,7 +10,7 @@ const Home = ({navigation}) => {
     const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
 
     const logout = async () => {
-        await AsyncStorage.clear();
+        await firebase.auth().signOut()
         setIsLoggedIn(false);
         navigation.navigate('Login');
     };

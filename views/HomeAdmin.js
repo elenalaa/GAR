@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, SafeAreaView, Text, Button, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 import AddItem from './AddItem';
-import Calendars from './Calendars';
+//import Calendars from './Calendars';
 import BorrowedItems from './BorrowedItems';
 import WishList from './WishList';
 
@@ -10,25 +10,25 @@ import WishList from './WishList';
 const screen = Dimensions.get("screen"); */
 
 
-const HomeAdmin = ({ navigation }) => {
+const HomeAdmin = ({navigation}) => {
 
 
     return (
         <SafeAreaView style={styles.container}>
             <Text>HomeAdmin</Text>
-             <Button title="Add new item" onPress={() =>
+            <Button title="Add new item" onPress={() =>
                 navigation.navigate('AddItem')
             } style={styles.button}
-            /> 
+            />
             <Button title="Calendars" onPress={() =>
                 navigation.navigate('Calendars')
             } style={styles.button}
-            /> 
-             <Button title="Borrowed Items" onPress={() =>
+            />
+            <Button title="Borrowed Items" onPress={() =>
                 navigation.navigate('BorrowedItems')
             } style={styles.button}
-            /> 
-             <Button title="Wishlist" onPress={() =>
+            />
+            <Button title="Wishlist" onPress={() =>
                 navigation.navigate('WishList')
             } style={styles.button}
             />
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 40,
-        
+
     },
 
     button: {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         marginBottom: 6,
         minWidth: "68%",
         textAlign: "center",
-        justifyContent:'center',
+        justifyContent: 'center',
     },
 });
 

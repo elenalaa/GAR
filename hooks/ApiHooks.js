@@ -7,13 +7,11 @@ const doLogin = async (userCreds) => {
     console.log(email, password);
 
     try {
-
         // Firebase auth getting and returning user info
         const authi = await firebase.auth().signInWithEmailAndPassword(email, password);
         console.log('apihooks sisäl authi: ', authi);
-        console.log('Mikä tää on: ', authi.operationType);
+
         if (authi.operationType == 'signIn') {
-            //console.log('oks tää nyt oikee?', token);
             return authi;
         }
 
@@ -30,32 +28,21 @@ const doRegister = async (userCreds) => {
     try {
         // first creates user, second returns new users token
         const newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        console.log('api register funktio: ', newUser);
+        console.log('api register funktio: ', newUser.operationType);
 
-        return newUser;
+        if (newUser.operationType == 'signIn') {
+            return newUser;
+        }
 
     } catch (e) {
         console.log(e)
     }
 }
 
-const getToken = async () => {
 
-    try {
-        // returns current users token
-        const token = await firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
-        console.log('getToken api hookseissa toimiiko? : ', token);
-
-        return token;
-    } catch (e) {
-        console.log(e)
-    }
-}
-
-
-const doAddItem = async(newItem) => {
+const doAddItem = async (newItem) => {
     const {title, description, amount, code} = newItem;
-    
+
     try {
         const newItem = await firebase.firestore.items
         console.log('new item added', newItem);
@@ -66,11 +53,8 @@ const doAddItem = async(newItem) => {
         console.log(e)
     }
 }
-    
 
 
 
 
-  
-
-export {doLogin, doRegister, getToken, doAddItem};
+export {doLogin, doRegister, doAddItem};
