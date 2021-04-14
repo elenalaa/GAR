@@ -36,12 +36,8 @@
     "react-native-reanimated": "^1.13.3",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.2",
-    "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "undefined": "@react-native-community/"
-  },
-  "devDependencies": {
-    "@babel/core": "~7.9.0"
   },
   "private": true
 }
