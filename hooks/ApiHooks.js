@@ -51,7 +51,7 @@ const getToken = async () => {
 }
 
 
-const doAddItem = async(newItem) => {
+ const doAddItem = async(newItem) => {
     const {title, description, amount, code} = newItem;
     
     try {
@@ -63,6 +63,17 @@ const doAddItem = async(newItem) => {
     } catch (e) {
         console.log(e)
     }
-}
+} 
 
-export {doLogin, doRegister, getToken, doAddItem};
+
+const postItem = async (formData) => {
+    /* const options = {
+        method: 'POST',
+    },
+     data: formData,  */
+    
+  
+
+};
+
+export {doLogin, doRegister, getToken, doAddItem, postItem};

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //import Items from '../views/Items';
 //import Product from './views/Product';
 import firebase from '../firebase/config.js';
-import storage from '@react-native-firebase/storage';
+//import storage from '@react-native-firebase/storage';
 
 
 /* const productArray = [
