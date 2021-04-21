@@ -5,12 +5,9 @@ import PropTypes from 'prop-types';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
 
-
-
 const Items = (props) => {
   const {navigation} = props;
 
-  
   return (
       <SafeAreaView style={styles.container}>
         <Text>Items</Text>
@@ -22,7 +19,7 @@ const Items = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#EDF2F5',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 40,
@@ -34,9 +31,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
       },
       title: {
-        fontSize: 32,
+        fontSize: 42,
       },
-    
 });
 
 Items.propTypes = {

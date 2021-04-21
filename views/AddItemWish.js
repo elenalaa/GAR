@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {StyleSheet, FlatList,
-    SafeAreaView, Text, Alert, TextInput, ActivityIndicator, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
-import useAddItemForm from '../hooks/AddItemHooks';
+import useAddItemWishForm from '../hooks/AddItemHooks';
 import firebase from '../firebase/config.js';
 import { Platform } from 'react-native';
 import * as Permissions from 'expo-permissions';
@@ -12,16 +9,20 @@ import { ThemeProvider, Button } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { IconButton } from 'react-native-paper';
-import { Entypo } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
+import {StyleSheet, TouchableOpacity,
+    SafeAreaView, Text} from 'react-native'; 
+import WishItem from '../views/WishItem';
 
 
-const AddItem = (props) => {
+
+const AddItemWish = (props) => {
   const {navigation} = props;
-  const { handleInputChange, inputs } = useAddItemForm();
+  const { handleInputChange, inputs } = useAddItemWishForm();
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
 
-  const doAddItem = async () => {
+  const doAddItemWish = async () => {
     setIsLoading(true);
     //try {
       //const userToken = await AsyncStorage.getItem('userToken');
@@ -30,21 +31,21 @@ const AddItem = (props) => {
         description: inputs.description,
         title: inputs.title,
         amount: inputs.amount,
-        code: inputs.code
+        code: inputs.code 
       };
       
       formData.append('title', inputs.title);
       formData.append('description', inputs.description);
       formData.append('amount', inputs.amount);
-      formData.append('code', inputs.code);
+      formData.append('code', inputs.code); 
 
       
       console.log(data)
-      addNewItem(data);
+      addNewItemWish(data);
      }
      
-      const addNewItem = (item) => {
-        firebase.firestore().collection('items').add({
+      const addNewItemWish = (item) => {
+        firebase.firestore().collection('itemswish').add({
           title: item.title,
           description: item.description,
           amount: item.amount,
@@ -123,7 +124,7 @@ const AddItem = (props) => {
 
       const saveImage = async (blob) => {
       
-        firebase.storage().ref('public/lena2').put(blob, {contentType: 'image/jpg'}).then(function (snapshot) {
+        firebase.storage().ref('public/').put(blob, {contentType: 'image/jpg'}).then(function (snapshot) {
           console.log('Uploaded a blob or file!');
       });
       
@@ -166,7 +167,7 @@ const AddItem = (props) => {
           onChangeText={(txt) => handleInputChange('description', txt)}
          // error={addItemErrors.description}
         />  
-        <TextInput  style={styles.input}
+         <TextInput  style={styles.input}
           autoCapitalize= 'none'
           placeholder='  Amount'
           placeholderTextColor='black'
@@ -181,7 +182,7 @@ const AddItem = (props) => {
           value={inputs.code}
           onChangeText={(txt) => handleInputChange('code', txt)}
          // error={addItemErrors.code}
-        />  
+        />   
      {/* </Form> */}
         <Button color='#124191'
         icon={
@@ -192,7 +193,7 @@ const AddItem = (props) => {
           />
         }
           title="  ADD NEW ITEM"
-          onPress={doAddItem}
+          onPress={doAddItemWish}
         />
         </ThemeProvider>
       </SafeAreaView>
@@ -238,10 +239,10 @@ const AddItem = (props) => {
   
 }); 
  
-AddItem.propTypes = {
+AddItemWish.propTypes = {
    route: PropTypes.object,
   // navigation:PropTypes.object,
 };
 
     
-export default AddItem;
+export default AddItemWish;

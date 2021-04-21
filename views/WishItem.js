@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {StyleSheet, SafeAreaView, Text, View, Image, Alert, Button, Icon} from 'react-native';
 import PropTypes from 'prop-types';
-//import { Button } from 'react-native-elements/dist/buttons/Button';
 
-const Product = (props) => {
+
+const WishItem = (props) => {
  const item = props.route.params.item;
 
  //const [date, setDate] = useState(new Date())
@@ -26,7 +26,7 @@ const Product = (props) => {
   return (
     
     <SafeAreaView style={styles.container}>
-      <Text>Item detail</Text>
+      <Text>Wish Item detail</Text>
      
        <View style={styles.imagebox}>
          
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
 });
 
 
-Product.propTypes = {
+WishItem.propTypes = {
   navigation: PropTypes.object,
 };
-export default Product;
+export default WishItem;

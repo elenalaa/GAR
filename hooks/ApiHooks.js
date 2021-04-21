@@ -66,6 +66,19 @@ const getToken = async () => {
 } 
 
 
+const doAddItemWish = async(newItemWish) => {
+    const {title, description, amount, code} = newItemWish;
+    
+    try {
+        const newItemWish = await firebase.firestore.itemswish
+        console.log('new item added', newItem);
+        return newItemWish;
+
+    } catch (e) {
+        console.log(e)
+    }
+} 
+
 const postItem = async (formData) => {
     /* const options = {
         method: 'POST',
@@ -76,4 +89,4 @@ const postItem = async (formData) => {
 
 };
 
-export {doLogin, doRegister, getToken, doAddItem, postItem};
+export {doLogin, doRegister, getToken, doAddItem, doAddItemWish, postItem};

@@ -7,9 +7,12 @@ import LogInForm from '../components/LoginForm';
 import {
     StyleSheet,
     View,
-    Text
+    Text,
+    ImageBackground,
+    Button,
 } from 'react-native';
 
+const image = require('../assets/LogoLogo.png') 
 const Login = ({navigation}) => {
     const {setUser, isLoggedIn, user, setIsLoggedIn} = useContext(AuthContext);
     //console.log('ollaanko logged in? ', isLoggedIn);
@@ -21,29 +24,48 @@ const Login = ({navigation}) => {
             setIsLoggedIn(true);
         }
     };
+    
     useEffect(() => {
         getToken();
     }, []);
 
-
     return (
-        <View style={styles.container}>
-            <Text>Login!</Text>
-            <LogInForm navigation={navigation} />
-            <RegisterForm navigation={navigation} />
-        </View>
+        
+        <ImageBackground source={image} style={styles.imageContainer}>
+        <LogInForm style={styles.loginForm} navigation={navigation} />
+        
+        {/* <RegisterForm navigation={navigation} /> */}
+        <Button 
+            color='#124191'
+            title="Don't have an account? Create one" 
+            onPress={() =>
+            navigation.navigate('Register')
+        }
+        />
+        
+        </ImageBackground> 
+        
     );
 };
 
 
-const styles = StyleSheet.create({
-    container: {
+const styles = StyleSheet.create({  
+    imageContainer: {
         flex: 1,
-        backgroundColor: '#fff',
+        resizeMode: "cover",
+        justifyContent: "center",
         alignItems: 'center',
         justifyContent: 'center',
-        textAlign: 'center',
+        paddingTop: 150,
+    }, 
+    buttonRegister: {
+        marginTop: 10,
+       //fontFamily: 'Nokia Pure Text T',
     },
+    loginForm: {
+        marginTop: 30,
+    },
+    
 });
 
 Login.propTypes = {
