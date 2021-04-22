@@ -41,7 +41,7 @@ const WishItem = (props) => {
         <Text>{item.description}</Text>
         </View>
         <View style={styles.view}>
-        <Button style={styles.button}
+        {/* <Button style={styles.button}
           title="Use"
           color="orange"
           onPress={() => Alert.alert('Button pressed')}
@@ -49,7 +49,7 @@ const WishItem = (props) => {
         <Button style={styles.button}
           title="Borrow"
           onPress={() => Alert.alert('Button pressed')}
-          />
+          /> */}
         {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
         {/*  <DatePicker
          

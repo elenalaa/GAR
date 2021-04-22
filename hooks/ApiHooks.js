@@ -66,13 +66,13 @@ const getToken = async () => {
 } 
 
 
-const doAddItemWish = async(newItemWish) => {
-    const {title, description, amount, code} = newItemWish;
+const doAddItemWish = async(newItem) => {
+    const {title, description, amount, code} = newItem;
     
     try {
-        const newItemWish = await firebase.firestore.itemswish
+        const newItem = await firebase.firestore.itemswish
         console.log('new item added', newItem);
-        return newItemWish;
+        return newItem;
 
     } catch (e) {
         console.log(e)
@@ -85,8 +85,6 @@ const postItem = async (formData) => {
     },
      data: formData,  */
     
-  
-
 };
 
 export {doLogin, doRegister, getToken, doAddItem, doAddItemWish, postItem};

@@ -80,6 +80,7 @@ const ListWish = ({navigation}) => {
         item={item} />
       }
     />
+    
   );
 };
 

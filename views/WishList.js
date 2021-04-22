@@ -32,7 +32,9 @@ const WishList = (props) => {
           />
         }
           title="  ADD WISH ITEM"
-          onPress={AddItemWish}
+          onPress={() =>
+            navigation.navigate('AddItemWish')
+        }  
         />
         </ThemeProvider>
       </SafeAreaView>

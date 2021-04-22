@@ -1,6 +1,7 @@
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
-import useAddItemWishForm from '../hooks/AddItemHooks';
+import useAddItemWishForm from '../hooks/AddItemWishHooks';
 import firebase from '../firebase/config.js';
 import { Platform } from 'react-native';
 import * as Permissions from 'expo-permissions';
@@ -10,9 +11,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { IconButton } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
-import {StyleSheet, TouchableOpacity,
-    SafeAreaView, Text} from 'react-native'; 
+
 import WishItem from '../views/WishItem';
+import {StyleSheet, FlatList,
+  SafeAreaView, Text, Alert, TextInput, ActivityIndicator, Image } from 'react-native';
+
 
 
 
