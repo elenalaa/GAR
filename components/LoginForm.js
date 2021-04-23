@@ -8,6 +8,7 @@ import {AuthContext} from '../contexts/AuthContext';
 import useLoginForm from '../hooks/LoginHooks';
 
 
+
 const LogInForm = ({navigation}) => {
     const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
 
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
     buttonS: {
         margin: 1,
     }
-
 });
 
 LogInForm.propTypes = {

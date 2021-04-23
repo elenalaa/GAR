@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {StyleSheet, SafeAreaView, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import {AuthContext} from '../contexts/AuthContext';
+
 import {Ionicons} from '@expo/vector-icons';
 import {ThemeProvider, Button, Header} from 'react-native-elements';
 import {Feather} from '@expo/vector-icons';
@@ -77,6 +78,7 @@ const Home = ({navigation}) => {
                     }
                 />
                 {/*  <IconButton 
+
             icon="log-out"
             size={72}
             onPress={logout}>
@@ -84,6 +86,7 @@ const Home = ({navigation}) => {
 
                 <Button
                     title={'Logout'} onPress={logout} />
+
             </ThemeProvider>
         </SafeAreaView>
     );

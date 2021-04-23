@@ -11,6 +11,7 @@ const WishItem = (props) => {
   //const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
+
     setDatePickerVisibility(true);
   };
 
@@ -58,6 +59,7 @@ const WishItem = (props) => {
         mode="date"
       />    */}
       </View>
+
     </SafeAreaView>
   );
 };
@@ -104,7 +106,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     textAlign: 'center',
     marginVertical: 8,
+
   },
+
 
   logo: {
     width: 250,

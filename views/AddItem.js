@@ -16,16 +16,17 @@ import {postItem, postStore} from '../hooks/ApiHooks';
 
 
 
-
 const AddItem = (props) => {
   const {navigation} = props;
   const [image, setImage] = useState(null);
+
   const {inputs, handleInputChange} = useAddItemForm();
   const state = {selectedLang: 0};
   const [category, setCategory] = useState(null)
 
 
   const doAddItem = async () => {
+
 
     try {
       // image to blob
@@ -51,13 +52,13 @@ const AddItem = (props) => {
   };
 
 
-
   const getPermissionAsync = async () => {
     //Get permissions
     if (Platform.OS !== 'web') {
       const {status} = await Permissions.askAsynk(Permissions.CAMERA);
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
+
       }
     }
   }
@@ -96,6 +97,7 @@ const AddItem = (props) => {
           onPress={pickImage}>
         </IconButton>
         {/* <Image
+
           source={{ uri: image }}
           style={{ width: null, height: 200, flex: 1}}
           PlaceholderContent={<ActivityIndicator />}
@@ -111,6 +113,7 @@ const AddItem = (props) => {
         />
         <TextInput style={styles.inputDes}
           autoCapitalize='none'
+
           placeholder='  Description'
           placeholderTextColor='black'
           value={inputs.description}
