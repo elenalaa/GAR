@@ -23,7 +23,7 @@ const AddItem = (props) => {
   const { handleInputChange, inputs } = useAddItemForm();
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
-const state={ selectedLang:0 }
+const state={ selectedLang:0 };
 
   const doAddItem = async () => {
     setIsLoading(true);
@@ -124,9 +124,8 @@ const state={ selectedLang:0 }
         });
       }
 
-      const saveImage = async (blob) => {
-      
-        firebase.storage().ref('public/lena2').put(blob, {contentType: 'image/jpg'}).then(function (snapshot) {
+    const saveImage = async (blob) => {
+      firebase.storage().ref('public/lena2').put(blob, {contentType: 'image/jpg'}).then(function (snapshot) {
           console.log('Uploaded a blob or file!');
       });
       
@@ -218,14 +217,12 @@ return (
           title="  ADD NEW ITEM"
           onPress={doAddItem} 
         />
-
       </ThemeProvider>
       </SafeAreaView>
    );
   }
     
-  
-  const styles = StyleSheet.create({
+ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#EDF2F5',
