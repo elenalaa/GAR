@@ -1,9 +1,8 @@
 import React, {useContext} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from 'prop-types';
 import FormTextInput from './FormTextInput';
 import {Button, View} from 'react-native';
-import useSignUpForm from '../hooks/RegisterHooks';
+import useLoginForm from '../hooks/LoginHooks';
 import {doLogin} from '../hooks/ApiHooks';
 import {AuthContext} from '../contexts/AuthContext';
 
@@ -23,7 +22,7 @@ const LogInForm = ({navigation}) => {
         }
     };
 
-    const {inputs, handleInputChange} = useSignUpForm();
+    const {inputs, handleInputChange} = useLoginForm();
 
 
     return (
