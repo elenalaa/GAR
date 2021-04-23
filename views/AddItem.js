@@ -201,6 +201,12 @@ return (
         color:state.selectedLang===1?"#fc5185":"gray",
         fontWeight:state.selectedLang===1? "bold" :"normal"
       }}>USE</Text>
+      <CheckBox checked={state.selectedLang===1} color="#fc5185" onPress={()=>setState({selectedLang:1})}/>
+      <Text style={
+      {...styles.checkBoxTxt,
+        color:state.selectedLang===1?"#fc5185":"gray",
+        fontWeight:state.selectedLang===1? "bold" :"normal"
+      }}>RESERVATION</Text>
       <Button color='#124191'
         icon={
           <Ionicons 
