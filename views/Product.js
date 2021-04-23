@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import {StyleSheet, SafeAreaView, Text, View, Image, Alert, Button, Icon} from 'react-native';
 import PropTypes from 'prop-types';
-//import { Button } from 'react-native-elements/dist/buttons/Button';
+import { Card } from 'react-native-elements';
 
 const Product = (props) => {
  const item = props.route.params.item;
 
- //const [date, setDate] = useState(new Date())
-
-  //const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
+  //const [date, setDate] = useState(new Date())
+//const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
 
    const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -29,8 +28,7 @@ const Product = (props) => {
       <Text>Item detail</Text>
      
        <View style={styles.imagebox}>
-         
-       <Image
+         <Image
           style={styles.logo}
           source={{uri: item.filename }}
         /> 

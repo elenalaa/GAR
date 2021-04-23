@@ -10,9 +10,6 @@ import { ThemeProvider, Button } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { IconButton } from 'react-native-paper';
-import { Entypo } from '@expo/vector-icons';
-
-import WishItem from '../views/WishItem';
 import {StyleSheet, FlatList,
   SafeAreaView, Text, Alert, TextInput, ActivityIndicator, Image } from 'react-native';
 
@@ -42,7 +39,6 @@ const AddItemWish = (props) => {
       formData.append('amount', inputs.amount);
       formData.append('code', inputs.code); 
 
-      
       console.log(data)
       addNewItemWish(data);
      }
@@ -195,7 +191,7 @@ const AddItemWish = (props) => {
             color="white"
           />
         }
-          title="  ADD NEW ITEM"
+          title="  ADD ITEM TO WISHLIST"
           onPress={doAddItemWish}
         />
         </ThemeProvider>

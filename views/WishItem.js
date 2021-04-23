@@ -36,7 +36,7 @@ const WishItem = (props) => {
         /> 
       </View>  
        <View style={styles.textbox}>
-        <Text>description</Text>
+        {/* <Text>description</Text> */}
         <Text style={styles.listTitle}>{item.title}</Text>
         <Text>{item.description}</Text>
         </View>
@@ -57,9 +57,7 @@ const WishItem = (props) => {
         onDateChange={setDate}
         mode="date"
       />    */}
-        
-      </View>
-      
+    </View>
     </SafeAreaView>
   );
 };

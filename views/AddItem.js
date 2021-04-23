@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {StyleSheet, FlatList,
-    SafeAreaView, Text, Alert, TextInput, ActivityIndicator, Image } from 'react-native';
+import {StyleSheet, FlatList, 
+    SafeAreaView, Text, TextInput, ActivityIndicator, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
 import useAddItemForm from '../hooks/AddItemHooks';
@@ -13,6 +13,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { IconButton } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons'; 
+import { Alert } from 'react-native';
+import { CheckBox } from 'react-native-elements';
+
 
 
 const AddItem = (props) => {
@@ -20,6 +23,7 @@ const AddItem = (props) => {
   const { handleInputChange, inputs } = useAddItemForm();
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
+const state={ selectedLang:0 }
 
   const doAddItem = async () => {
     setIsLoading(true);
@@ -51,7 +55,6 @@ const AddItem = (props) => {
           code: item.code,
          //image: item.filename,
         });
-        
         Alert.alert('Action!', 'A new item was created');
 
       }
@@ -135,7 +138,9 @@ const AddItem = (props) => {
         },
       };
 
- return (
+     
+
+return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
       <Text style={styles.title}>Add Item</Text>
@@ -183,7 +188,20 @@ const AddItem = (props) => {
          // error={addItemErrors.code}
         />  
      {/* </Form> */}
-        <Button color='#124191'
+     
+     <CheckBox checked={state.selectedLang===1} color="#fc5185" onPress={()=>setState({selectedLang:1})}/>
+      <Text style={
+      {...styles.checkBoxTxt,
+        color:state.selectedLang===1?"#fc5185":"gray",
+        fontWeight:state.selectedLang===1? "bold" :"normal"
+      }}>BORROW</Text>
+      <CheckBox checked={state.selectedLang===1} color="#fc5185" onPress={()=>setState({selectedLang:1})}/>
+      <Text style={
+      {...styles.checkBoxTxt,
+        color:state.selectedLang===1?"#fc5185":"gray",
+        fontWeight:state.selectedLang===1? "bold" :"normal"
+      }}>USE</Text>
+      <Button color='#124191'
         icon={
           <Ionicons 
             name="add-circle"
@@ -192,9 +210,10 @@ const AddItem = (props) => {
           />
         }
           title="  ADD NEW ITEM"
-          onPress={doAddItem}
+          onPress={doAddItem} 
         />
-        </ThemeProvider>
+
+      </ThemeProvider>
       </SafeAreaView>
    );
   }
@@ -233,6 +252,9 @@ const AddItem = (props) => {
     },
     title: {
         fontSize: 32,
+    },
+    checkBoxTxt:{
+      marginLeft:20
     },
    
   
