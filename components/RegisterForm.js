@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import FormTextInput from './FormTextInput';
-import {Button, View} from 'react-native';
+import {StyleSheet, Button, View} from 'react-native';
 import useSignUpForm from '../hooks/RegisterHooks';
 import {doRegister} from '../hooks/ApiHooks';
 import {AuthContext} from '../contexts/AuthContext';
@@ -26,27 +26,44 @@ const RegisterForm = ({navigation}) => {
     const {inputs, handleInputChange} = useSignUpForm();
     return (
         <View>
-            <FormTextInput
+            <FormTextInput style={styles.containerForm}
                 autoCapitalize="none"
                 placeholder="email"
                 onChangeText={(txt) => handleInputChange('email', txt)}
             />
-            <FormTextInput
+            <FormTextInput style={styles.containerForm}
                 autoCapitalize="none"
                 placeholder="password"
                 onChangeText={(txt) => handleInputChange('password', txt)}
                 secureTextEntry={true}
             />
-            <FormTextInput
+            <FormTextInput style={styles.containerForm}
                 autoCapitalize="none"
                 placeholder="full name"
                 onChangeText={(txt) => handleInputChange('full_name', txt)}
             />
-            <Button title="Register!" onPress={registerPress} />
+            <Button color='#124191' title="Register!" onPress={registerPress} />
         </View>
 
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+
+    },
+    containerForm: {
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 10,
+        marginVertical: 8,
+        maxWidth: "100%",
+        borderRadius: 4,
+        borderColor: '#44546A',
+    },
+
+});
 
 RegisterForm.propTypes = {
     navigation: PropTypes.object,

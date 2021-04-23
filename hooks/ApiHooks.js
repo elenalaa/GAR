@@ -44,7 +44,7 @@ const doRegister = async (userCreds) => {
 
 
 const postStore = async (newItem, url) => {
-    const {title, description, category, code} = newItem;
+    const {title, description, type, code} = newItem;
 
     // posts inputs and img url for storage
     try {
@@ -55,7 +55,7 @@ const postStore = async (newItem, url) => {
             .add({
                 title: title,
                 description: description,
-                category: category,
+                type: type,
                 code: code,
                 url: url,
             })
@@ -73,7 +73,7 @@ const postItem = async (data, inputs) => {
 
     // tries to posts image to storage and returns url for it
 
-    const {title, description, category, code} = inputs;
+    const {title, description, type, code} = inputs;
     const storageRef = projectStorage.ref(`items/${title}`);
     const task = storageRef.put(data)
 
@@ -95,7 +95,21 @@ const postItem = async (data, inputs) => {
     } catch (e) {
         console.log(e)
     }
+}
 
-};
 
-export {doLogin, doRegister, postStore, postItem};
+const doAddItemWish = async (newItem) => {
+    const {title, description, amount, code} = newItem;
+
+    try {
+        const newItem = await firebase.firestore.itemswish
+        console.log('new item added', newItem);
+        return newItem;
+
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+
+export {doLogin, doRegister, postStore, doAddItemWish, postItem};

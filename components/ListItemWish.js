@@ -3,31 +3,31 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, Image, } from 'react-native';
 
 
-const MyListItem = ({item, navigation}) => {
+const MyListItemWish = ({item, navigation}) => {
   //navigation, productArray}) => {
 
   return (
     <TouchableOpacity onPress={
       () => {
-        navigation.navigate('Product', {item: item});
+        navigation.navigate('WishItem', {item: item});
       }
-    }>
-      <View>
-        <View style={styles.imagebox}>
-          <Image
-            style={styles.tinyLogo}
-            source={{uri: item.url}}
-          />
-        </View>
-        <View style={styles.textbox}>
-          <Text style={styles.listTitle}>{item.title}</Text>
-          <Text>{item.description}</Text>
-          <Text>{item.category}</Text>
-          <Text>{item.code}</Text>
-          <Image source={{uri: item.url}}></Image>
-
-        </View>
+    }>  
+    <View>
+      <View style={styles.imagebox}>
+       <Image
+          style={styles.tinyLogo}
+          source={{uri: item.filename }}
+        /> 
+      </View>  
+      <View style={styles.textbox}>
+        <Text style={styles.listTitle}>{item.title}</Text>
+        <Text>{item.description}</Text>
+        {/* <Text>{item.amount}</Text>
+        <Text>{item.code}</Text> */}
+        <Image source={{uri: item.picture }}></Image>
+        
       </View>
+    </View> 
     </TouchableOpacity>
   );
 };
@@ -66,9 +66,9 @@ const styles = StyleSheet.create({
   },
 });
 
-MyListItem.propTypes = {
+MyListItemWish.propTypes = {
   navigation: PropTypes.object,
   //productArray: PropTypes.object,
 };
 
-export default MyListItem;
+export default MyListItemWish;

@@ -1,37 +1,88 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, Text, Button, Dimensions} from 'react-native';
+import {StyleSheet, SafeAreaView, Text, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
-import AddItem from './AddItem';
-//import Calendars from './Calendars';
-import BorrowedItems from './BorrowedItems';
-import WishList from './WishList';
+import {Ionicons} from '@expo/vector-icons';
+import {ThemeProvider, Button} from 'react-native-elements';
+import {Feather} from '@expo/vector-icons';
+import {FontAwesome5} from '@expo/vector-icons';
+import {MaterialIcons} from '@expo/vector-icons';
 
-/* const window = Dimensions.get("window");
-const screen = Dimensions.get("screen"); */
 
+const window = Dimensions.get("window");
+const screen = Dimensions.get("screen");
+
+const theme = {
+    colors: {
+        primary: '#124191',
+    },
+};
 
 const HomeAdmin = ({navigation}) => {
 
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>HomeAdmin</Text>
-            <Button title="Add new item" onPress={() =>
-                navigation.navigate('AddItem')
-            } style={styles.button}
-            />
-            <Button title="Calendars" onPress={() =>
-                navigation.navigate('Calendars')
-            } style={styles.button}
-            />
-            <Button title="Borrowed Items" onPress={() =>
-                navigation.navigate('BorrowedItems')
-            } style={styles.button}
-            />
-            <Button title="Wishlist" onPress={() =>
-                navigation.navigate('WishList')
-            } style={styles.button}
-            />
+            <ThemeProvider theme={theme}>
+                <Button style={styles.button}
+                    icon={
+                        <Ionicons
+                            name="add-circle"
+                            size={72}
+                            color="white" />
+                    }
+                    title="ADD NEW ITEM" onPress={() =>
+                        navigation.navigate('AddItem')
+                    }
+                />
+
+                <Button style={styles.button}
+                    icon={
+                        <Feather
+                            name="calendar"
+                            size={72}
+                            color="white" />
+                    }
+                    title="  CALENDARS" onPress={() =>
+                        navigation.navigate('Calendars')
+                    }
+                />
+
+                <Button style={styles.button}
+                    icon={
+                        <FontAwesome5
+                            name="screwdriver"
+                            size={72}
+                            color="white" />
+                    }
+                    title="  BORROWED ITEMS" onPress={() =>
+                        navigation.navigate('BorrowedItems')
+                    }
+                />
+
+                <Button style={styles.button}
+                    icon={
+                        <FontAwesome5
+                            name="clipboard-list"
+                            size={72}
+                            color="white" />
+                    }
+                    title="  WISHLIST" onPress={() =>
+                        navigation.navigate('WishList')
+                    }
+                />
+
+                <Button
+                    icon={
+                        <MaterialIcons
+                            name="login"
+                            size={72}
+                            color="white" />
+                    }
+                    title="  LOG" onPress={() =>
+                        navigation.navigate('Home')
+                    }
+                />
+            </ThemeProvider>
         </SafeAreaView>
     );
 };
@@ -39,24 +90,19 @@ const HomeAdmin = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 40,
+        backgroundColor: '#EDF2F5',
+        margin: 20,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignSelf: 'stretch',
+        marginVertical: 20,
 
     },
-
     button: {
-        //paddingHorizontal: 20,
-        //marginVertical: 30,
-        paddingBottom: 20,
-        borderRadius: 10,
-        marginHorizontal: "1%",
-        marginBottom: 6,
-        minWidth: "68%",
-        textAlign: "center",
-        justifyContent: 'center',
-    },
+        borderRadius: 4,
+        paddingTop: 10,
+    }
+
 });
 
 HomeAdmin.propTypes = {

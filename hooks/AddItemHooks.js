@@ -4,9 +4,8 @@ const useAddItemForm = (callback) => {
   const [inputs, setInputs] = useState({
     title: '',
     description: '',
-    category: '',
+    type: '',
     code: '',
-
 
   });
 
