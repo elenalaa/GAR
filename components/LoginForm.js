@@ -1,28 +1,22 @@
 import React, {useContext} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from 'prop-types';
 import FormTextInput from './FormTextInput';
-import {StyleSheet,Button, View, Text} from 'react-native';
+import {StyleSheet, Button, View, Text} from 'react-native';
 import useSignUpForm from '../hooks/RegisterHooks';
 import {doLogin, getToken} from '../hooks/ApiHooks';
 import {AuthContext} from '../contexts/AuthContext';
-import { color } from 'react-native-reanimated';
+import useLoginForm from '../hooks/LoginHooks';
+
 
 
 const LogInForm = ({navigation}) => {
-    const {isLoggedIn, setIsLoggedIn, setUser} = useContext(AuthContext);
+    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
 
     const loginPress = async () => {
         try {
             // form inputs to Apihooks to get userdata
             const userData = await doLogin(inputs);
-            console.log('Kalastetaan userData: ', userData);
-            setUser(userData);
-
-            //token get and set
-            const token = await getToken();
-            await AsyncStorage.setItem('userToken', token);
-            //console.log('Login press saa tokenin? :', token)
+            console.log('Kalastetaan userData: ', userData.operationType);
             setIsLoggedIn(true);
 
         } catch (e) {
@@ -30,7 +24,7 @@ const LogInForm = ({navigation}) => {
         }
     };
 
-    const {inputs, handleInputChange} = useSignUpForm();
+    const {inputs, handleInputChange} = useLoginForm();
 
 
     return (
@@ -49,9 +43,9 @@ const LogInForm = ({navigation}) => {
                 secureTextEntry={true}
             />
             <Button style={styles.buttonS}
-            color='#124191' 
-            title="SIGN IN" 
-            onPress={loginPress} />
+                color='#124191'
+                title="SIGN IN"
+                onPress={loginPress} />
             <Text>...</Text>
         </View>
 
@@ -61,7 +55,7 @@ const LogInForm = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        
+
     },
     containerForm: {
         backgroundColor: '#fff',
@@ -70,11 +64,10 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: '#44546A',
         marginBottom: 10,
-    },  
+    },
     buttonS: {
         margin: 1,
     }
- 
 });
 
 LogInForm.propTypes = {
