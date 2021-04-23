@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {StyleSheet, FlatList, 
-    SafeAreaView, Text, TextInput, ActivityIndicator, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
-import useAddItemForm from '../hooks/AddItemHooks';
+import useAddItemWishForm from '../hooks/AddItemWishHooks';
 import firebase from '../firebase/config.js';
 import { Platform } from 'react-native';
 import * as Permissions from 'expo-permissions';
@@ -12,20 +10,19 @@ import { ThemeProvider, Button } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { IconButton } from 'react-native-paper';
-import { Entypo } from '@expo/vector-icons'; 
-import { Alert } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import {StyleSheet, FlatList,
+  SafeAreaView, Text, Alert, TextInput, ActivityIndicator, Image } from 'react-native';
 
 
 
-const AddItem = (props) => {
+
+const AddItemWish = (props) => {
   const {navigation} = props;
-  const { handleInputChange, inputs } = useAddItemForm();
+  const { handleInputChange, inputs } = useAddItemWishForm();
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
-const state={ selectedLang:0 }
 
-  const doAddItem = async () => {
+  const doAddItemWish = async () => {
     setIsLoading(true);
     //try {
       //const userToken = await AsyncStorage.getItem('userToken');
@@ -34,27 +31,27 @@ const state={ selectedLang:0 }
         description: inputs.description,
         title: inputs.title,
         amount: inputs.amount,
-        code: inputs.code
+        code: inputs.code 
       };
       
       formData.append('title', inputs.title);
       formData.append('description', inputs.description);
       formData.append('amount', inputs.amount);
-      formData.append('code', inputs.code);
+      formData.append('code', inputs.code); 
 
-      
       console.log(data)
-      addNewItem(data);
+      addNewItemWish(data);
      }
      
-      const addNewItem = (item) => {
-        firebase.firestore().collection('items').add({
+      const addNewItemWish = (item) => {
+        firebase.firestore().collection('itemswish').add({
           title: item.title,
           description: item.description,
           amount: item.amount,
           code: item.code,
          //image: item.filename,
         });
+        
         Alert.alert('Action!', 'A new item was created');
 
       }
@@ -126,7 +123,7 @@ const state={ selectedLang:0 }
 
       const saveImage = async (blob) => {
       
-        firebase.storage().ref('public/lena2').put(blob, {contentType: 'image/jpg'}).then(function (snapshot) {
+        firebase.storage().ref('public/').put(blob, {contentType: 'image/jpg'}).then(function (snapshot) {
           console.log('Uploaded a blob or file!');
       });
       
@@ -138,9 +135,7 @@ const state={ selectedLang:0 }
         },
       };
 
-     
-
-return (
+ return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
       <Text style={styles.title}>Add Item</Text>
@@ -171,7 +166,7 @@ return (
           onChangeText={(txt) => handleInputChange('description', txt)}
          // error={addItemErrors.description}
         />  
-        <TextInput  style={styles.input}
+         <TextInput  style={styles.input}
           autoCapitalize= 'none'
           placeholder='  Amount'
           placeholderTextColor='black'
@@ -186,28 +181,9 @@ return (
           value={inputs.code}
           onChangeText={(txt) => handleInputChange('code', txt)}
          // error={addItemErrors.code}
-        />  
+        />   
      {/* </Form> */}
-     
-     <CheckBox checked={state.selectedLang===1} color="#fc5185" onPress={()=>setState({selectedLang:1})}/>
-      <Text style={
-      {...styles.checkBoxTxt,
-        color:state.selectedLang===1?"#fc5185":"gray",
-        fontWeight:state.selectedLang===1? "bold" :"normal"
-      }}>BORROW</Text>
-      <CheckBox checked={state.selectedLang===1} color="#fc5185" onPress={()=>setState({selectedLang:1})}/>
-      <Text style={
-      {...styles.checkBoxTxt,
-        color:state.selectedLang===1?"#fc5185":"gray",
-        fontWeight:state.selectedLang===1? "bold" :"normal"
-      }}>USE</Text>
-      <CheckBox checked={state.selectedLang===1} color="#fc5185" onPress={()=>setState({selectedLang:1})}/>
-      <Text style={
-      {...styles.checkBoxTxt,
-        color:state.selectedLang===1?"#fc5185":"gray",
-        fontWeight:state.selectedLang===1? "bold" :"normal"
-      }}>RESERVATION</Text>
-      <Button color='#124191'
+        <Button color='#124191'
         icon={
           <Ionicons 
             name="add-circle"
@@ -215,11 +191,10 @@ return (
             color="white"
           />
         }
-          title="  ADD NEW ITEM"
-          onPress={doAddItem} 
+          title="  ADD ITEM TO WISHLIST"
+          onPress={doAddItemWish}
         />
-
-      </ThemeProvider>
+        </ThemeProvider>
       </SafeAreaView>
    );
   }
@@ -259,17 +234,14 @@ return (
     title: {
         fontSize: 32,
     },
-    checkBoxTxt:{
-      marginLeft:20
-    },
    
   
 }); 
  
-AddItem.propTypes = {
+AddItemWish.propTypes = {
    route: PropTypes.object,
   // navigation:PropTypes.object,
 };
 
     
-export default AddItem;
+export default AddItemWish;

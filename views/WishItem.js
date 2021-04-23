@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import {StyleSheet, SafeAreaView, Text, View, Image, Alert, Button, Icon} from 'react-native';
 import PropTypes from 'prop-types';
-import { Card } from 'react-native-elements';
 
-const Product = (props) => {
+
+const WishItem = (props) => {
  const item = props.route.params.item;
 
-  //const [date, setDate] = useState(new Date())
-//const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
+ //const [date, setDate] = useState(new Date())
+
+  //const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
 
    const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -25,21 +26,22 @@ const Product = (props) => {
   return (
     
     <SafeAreaView style={styles.container}>
-      <Text>Item detail</Text>
+      <Text>Wish Item detail</Text>
      
        <View style={styles.imagebox}>
-         <Image
+         
+       <Image
           style={styles.logo}
           source={{uri: item.filename }}
         /> 
       </View>  
        <View style={styles.textbox}>
-        <Text>description</Text>
+        {/* <Text>description</Text> */}
         <Text style={styles.listTitle}>{item.title}</Text>
         <Text>{item.description}</Text>
         </View>
         <View style={styles.view}>
-        <Button style={styles.button}
+        {/* <Button style={styles.button}
           title="Use"
           color="orange"
           onPress={() => Alert.alert('Button pressed')}
@@ -47,7 +49,7 @@ const Product = (props) => {
         <Button style={styles.button}
           title="Borrow"
           onPress={() => Alert.alert('Button pressed')}
-          />
+          /> */}
         {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
         {/*  <DatePicker
          
@@ -55,9 +57,7 @@ const Product = (props) => {
         onDateChange={setDate}
         mode="date"
       />    */}
-        
-      </View>
-      
+    </View>
     </SafeAreaView>
   );
 };
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
 });
 
 
-Product.propTypes = {
+WishItem.propTypes = {
   navigation: PropTypes.object,
 };
-export default Product;
+export default WishItem;
