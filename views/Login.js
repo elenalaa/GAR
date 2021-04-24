@@ -1,12 +1,9 @@
 import React, {useEffect, useContext} from "react";
 import {AuthContext} from '../contexts/AuthContext';
 import PropTypes from 'prop-types';
-import RegisterForm from '../components/RegisterForm';
 import LogInForm from '../components/LoginForm';
 import {
     StyleSheet,
-    View,
-    Text,
     ImageBackground,
     Button,
 } from 'react-native';
