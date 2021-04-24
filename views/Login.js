@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 
+
 const image = require('../assets/LogoLogo.png')
+
 const Login = ({navigation}) => {
     const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
 
@@ -27,6 +29,7 @@ const Login = ({navigation}) => {
 
     };
 
+  
     useEffect(() => {
         getToken();
     }, []);
@@ -52,6 +55,7 @@ const Login = ({navigation}) => {
 
 
 const styles = StyleSheet.create({
+
     imageContainer: {
         flex: 1,
         resizeMode: "cover",

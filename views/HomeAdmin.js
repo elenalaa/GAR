@@ -10,6 +10,7 @@ import {FontAwesome5} from '@expo/vector-icons';
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
+
 const theme = {
     colors: {
         primary: '#124191',
@@ -22,6 +23,7 @@ const HomeAdmin = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <ThemeProvider theme={theme}>
+
                 <Button style={styles.button}
                     icon={
                         <Ionicons
@@ -84,11 +86,13 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         marginVertical: 20,
 
+
     },
     button: {
         borderRadius: 4,
         paddingTop: 10,
     }
+
 
 });
 

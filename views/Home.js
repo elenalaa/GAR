@@ -75,12 +75,13 @@ const Home = ({navigation}) => {
                     }
                 />
                 {/*  <IconButton 
+
             icon="log-out"
             size={72}
             onPress={logout}>
             </IconButton>  */}
             </ThemeProvider>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 };
 

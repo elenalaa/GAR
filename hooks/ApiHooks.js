@@ -109,6 +109,7 @@ const doAddItemWish = async (newItem) => {
     } catch (e) {
         console.log(e)
     }
+
 }
 
 
