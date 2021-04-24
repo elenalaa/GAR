@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
-  SafeAreaView, Text, TextInput
+  SafeAreaView, Text, TextInput, Image
 } from 'react-native';
 import PropTypes from 'prop-types';
 import useAddItemForm from '../hooks/AddItemHooks';
@@ -96,6 +96,7 @@ const AddItem = (props) => {
           size={72}
           onPress={pickImage}>
         </IconButton>
+        {image && <Image source={{uri: image.uri}} style={{flex: 1}} />}
         {/* <Image
 
           source={{ uri: image }}
