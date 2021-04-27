@@ -14,6 +14,7 @@ import {IconButton} from 'react-native-paper';
 import {CheckBox} from 'react-native-elements';
 import {postItem, postStore} from '../hooks/ApiHooks';
 import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from '@expo/vector-icons';
 
 
 const AddItem = (props) => {
@@ -21,21 +22,18 @@ const AddItem = (props) => {
   const [image, setImage] = useState(null);
 
   const {inputs, handleInputChange} = useAddItemForm();
-  // const state = {selectedLang: 0};
-  //const [category, setCategory] = useState(null)
+  
+  const [categoryIndex, setCategoryIndex] = useState(0);   
+  const categoryList = ["Free Use", "Borrow", "Reservation"];
+   
 
-const [categoryIndex, setCategoryIndex] = useState(0);   
-const categoryList = ["Use", "Borrow", "Reservation"];
-
-const categoryChangeHandler = 
-(index) => {
-  console.log("index \t", index);
-  setCategoryIndex((preIndex) => index);
+  const categoryChangeHandler = 
+  (index) => {
+    console.log("index \t", index);
+    setCategoryIndex((preIndex) => index);
 }
-
+  
   const doAddItem = async () => {
-
-
     try {
       // image to blob
       const response = await fetch(image.uri);
@@ -48,7 +46,7 @@ const categoryChangeHandler =
       try {
         //puts info in firestore if imgurl ok
         await imgUrl;
-        const db = await postStore(inputs, imgUrl);
+        const db = await postStore(inputs, imgUrl, categoryList[categoryIndex]);
         console.log(db);
       } catch (e) {
         console.log('db things: ', e)
@@ -98,32 +96,7 @@ const categoryChangeHandler =
   return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
-      <View style={{ flexDirection: "row" }}>
-                    {categoryList.map((data, index) => (
-                      <TouchableOpacity
-                        key={data}
-                        style={{
-                          flexDirection: "row",
-                          margin: 10,
-                          flex: 3,
-                          justifyContent: "space-evenly",
-                        }}
-                        onPress={categoryChangeHandler.bind(this, index)}
-                      >
-                        <MaterialIcons
-                          name={
-                            index === categoryIndex
-                              ? "radio-button-checked"
-                              : "radio-button-unchecked"
-                          }
-                          size={18}
-                          color='#124191'
-                        />
-                        <Text style={styles.checkBoxTxt}>{data}</Text>
-                      </TouchableOpacity>
-                    ))}
-        </View> 
-        {/* <Text style={styles.title}>Add Item</Text> */}
+      {/* <Text style={styles.title}>Add Item</Text> */}
         <IconButton
           icon="camera"
           size={72}
@@ -131,7 +104,6 @@ const categoryChangeHandler =
         </IconButton>
 
         {/* <Image
-
           source={{ uri: image }}
           style={{ width: null, height: 200, flex: 1}}
           PlaceholderContent={<ActivityIndicator />}
@@ -170,6 +142,33 @@ const categoryChangeHandler =
         // error={addItemErrors.code}
         />
         {/* </Form> */}
+        <View style={{ flexDirection: "row" }}>
+                    {categoryList.map((data, index) => (
+                      <TouchableOpacity
+                        key={data}
+                        style={{
+                          flexDirection: "row",
+                          margin: 10,
+                          flex: 3,
+                          justifyContent: "space-evenly",
+                        }}
+                        onPress={categoryChangeHandler.bind(this, index)}
+                      >
+
+        {/* <AntDesign name="checkcircle" size={24} color="black" />   */}
+                        <MaterialIcons
+                          name={
+                            index === categoryIndex
+                              ? "radio-button-checked"
+                              : "radio-button-unchecked"
+                          }
+                          size={18}
+                          color='#124191'
+                        />
+                        <Text style={styles.checkBoxTxt}>{data}</Text>
+                      </TouchableOpacity>
+                    ))}
+        </View> 
         
         <Button color='#124191'
           icon={

@@ -42,22 +42,7 @@ const WishItem = (props) => {
         <Text>{item.description}</Text>
       </View>
       <View style={styles.view}>
-        {/* <Button style={styles.button}
-          title="Use"
-          color="orange"
-          onPress={() => Alert.alert('Button pressed')}
-          />
-        <Button style={styles.button}
-          title="Borrow"
-          onPress={() => Alert.alert('Button pressed')}
-          /> */}
-        {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
-        {/*  <DatePicker
-         
-        date={date}
-        onDateChange={setDate}
-        mode="date"
-      />    */}
+       
       </View>
 
     </SafeAreaView>

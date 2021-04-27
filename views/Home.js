@@ -84,8 +84,8 @@ const Home = ({navigation}) => {
             onPress={logout}>
             </IconButton>  */}
 
-                <Button
-                    title={'Logout'} onPress={logout} />
+                {/* <Button
+                    title={'Logout'} onPress={logout} /> */}
 
             </ThemeProvider>
         </SafeAreaView>

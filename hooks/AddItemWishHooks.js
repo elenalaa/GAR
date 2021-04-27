@@ -4,8 +4,7 @@ const useAddItemWishForm = (callback) => {
    const [inputs, setInputs] = useState({
         title: '',
         description: '',
-        //type: '',
-        //code: '',
+       
        
         
     });

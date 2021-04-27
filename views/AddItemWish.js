@@ -30,15 +30,12 @@ const AddItemWish = (props) => {
       const data = {
         description: inputs.description,
         title: inputs.title,
-        amount: inputs.amount,
-        code: inputs.code 
+       
       };
       
       formData.append('title', inputs.title);
       formData.append('description', inputs.description);
-      formData.append('amount', inputs.amount);
-      formData.append('code', inputs.code); 
-
+     
       console.log(data)
       addNewItemWish(data);
      }
@@ -47,8 +44,7 @@ const AddItemWish = (props) => {
         firebase.firestore().collection('itemswish').add({
           title: item.title,
           description: item.description,
-          amount: item.amount,
-          code: item.code,
+         
          //image: item.filename,
         });
         
@@ -138,7 +134,7 @@ const AddItemWish = (props) => {
  return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
-      <Text style={styles.title}>Add Item</Text>
+      <Text style={styles.title}>Add Wish Item</Text>
       <IconButton 
         icon="camera"
         size={72}
@@ -166,22 +162,8 @@ const AddItemWish = (props) => {
           onChangeText={(txt) => handleInputChange('description', txt)}
          // error={addItemErrors.description}
         />  
-         <TextInput  style={styles.input}
-          autoCapitalize= 'none'
-          placeholder='  Amount'
-          placeholderTextColor='black'
-          value={inputs.amount}
-          onChangeText={(txt) => handleInputChange('amount', txt)}
-         // error={addItemErrors.amount}
-        />  
-        <TextInput  style={styles.input}
-          autoCapitalize= 'none'
-          placeholder='  Code'
-          placeholderTextColor='black'
-          value={inputs.code}
-          onChangeText={(txt) => handleInputChange('code', txt)}
-         // error={addItemErrors.code}
-        />   
+        
+       
      {/* </Form> */}
         <Button color='#124191'
         icon={

@@ -39,9 +39,7 @@ const WishList = (props) => {
             navigation.navigate('AddItemWish')
             
         }  
-
-      
-        />
+      />
         </ThemeProvider>
        
      </SafeAreaView>

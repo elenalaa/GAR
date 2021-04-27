@@ -1,10 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, TouchableOpacity} from 'react-native';
-//import { ListItem as CoolListItem, Thumbnail, Left, Body } from 'native-base';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
-//import Items from '../views/Items';
-//import Product from './views/Product';
 import firebase from '../firebase/config.js';
 //import storage from '@react-native-firebase/storage';
 
@@ -22,14 +19,16 @@ const List = ({navigation}) => {
     return ref.onSnapshot(querySnapshot => {
       const list = [];
       querySnapshot.forEach(doc => {
-        const {title, description, category, code, url} = doc.data();
+        const {title, description, type, code, url, category} = doc.data();
         list.push({
           key: doc.id,
           title,
           description,
-          category,
+          type,
           code,
-          url
+          url, 
+          category,
+          
         });
       });
 
@@ -37,7 +36,6 @@ const List = ({navigation}) => {
     });
   }
   return (
-
     <FlatList
       data={items}
       keyExtractor={item => item.key}

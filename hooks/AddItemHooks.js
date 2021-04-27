@@ -6,8 +6,6 @@ const useAddItemForm = (callback) => {
     description: '',
     type: '',
     code: '',
-    
-
   });
 
   const handleInputChange = (name, text) => {
@@ -19,7 +17,6 @@ const useAddItemForm = (callback) => {
       };
     });
   };
-
 
   return {
     handleInputChange,
