@@ -5,6 +5,7 @@ import {Card} from 'react-native-elements';
 
 const Product = (props) => {
   const item = props.route.params.item;
+  const {navigation} = props;
 
   //const [date, setDate] = useState(new Date())
   //const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
@@ -40,13 +41,14 @@ const Product = (props) => {
       </View>
       <View style={styles.view}>
         <Button style={styles.button}
-          title="Use"
+          title="Reservations"
           color="orange"
-          onPress={() => Alert.alert('Button pressed')}
+          onPress={() => navigation.navigate('Reservations')}
         />
         <Button style={styles.button}
           title="Borrow"
-          onPress={() => Alert.alert('Button pressed')}
+          onPress={() => navigation.navigate('Borrow')
+          }
         />
         {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
         {/*  <DatePicker
@@ -57,10 +59,10 @@ const Product = (props) => {
       />    */}
 
       </View>
-
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

@@ -10,6 +10,7 @@ import {
 import firebase from 'firebase';
 
 
+
 const image = require('../assets/LogoLogo.png')
 
 const Login = ({navigation}) => {
@@ -29,7 +30,7 @@ const Login = ({navigation}) => {
 
     };
 
-  
+
     useEffect(() => {
         getToken();
     }, []);
@@ -53,6 +54,7 @@ const Login = ({navigation}) => {
     );
 };
 
+// <ImageBackground source={image} style={styles.imageContainer}>  
 
 const styles = StyleSheet.create({
 

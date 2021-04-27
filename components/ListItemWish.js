@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, Image, } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 
 
 const MyListItemWish = ({item, navigation}) => {
@@ -11,23 +11,21 @@ const MyListItemWish = ({item, navigation}) => {
       () => {
         navigation.navigate('WishItem', {item: item});
       }
-    }>  
-    <View>
-      <View style={styles.imagebox}>
-       <Image
-          style={styles.tinyLogo}
-          source={{uri: item.filename }}
-        /> 
-      </View>  
-      <View style={styles.textbox}>
-        <Text style={styles.listTitle}>{item.title}</Text>
-        <Text>{item.description}</Text>
-        {/* <Text>{item.amount}</Text>
-        <Text>{item.code}</Text> */}
-        <Image source={{uri: item.picture }}></Image>
-        
+    }>
+      <View>
+        <View style={styles.imagebox}>
+          <Image
+            style={styles.tinyLogo}
+            source={{uri: item.url}}
+          />
+        </View>
+        <View style={styles.textbox}>
+          <Text style={styles.listTitle}>{item.title}</Text>
+          <Text>{item.description}</Text>
+          <Image source={{uri: item.url}}></Image>
+
+        </View>
       </View>
-    </View> 
     </TouchableOpacity>
   );
 };

@@ -74,7 +74,7 @@ const postItem = async (data, inputs) => {
     // tries to posts image to storage and returns url for it
 
     const {title, description, type, code} = inputs;
-    const storageRef = projectStorage.ref(`items/${title}`);
+    const storageRef = projectStorage.ref(`/items/${title}`);
     const task = storageRef.put(data)
 
     try {
@@ -98,19 +98,54 @@ const postItem = async (data, inputs) => {
 }
 
 
-const doAddItemWish = async (newItem) => {
-    const {title, description, amount, code} = newItem;
+const postWishImg = async (data, inputs) => {
+    // tries to posts image to storage and returns url for it
+
+    const {title, description, type, code} = inputs;
+    const storageRef = projectStorage.ref(`/wishlist/${title}`);
+    const task = storageRef.put(data)
 
     try {
-        const newItem = await firebase.firestore.itemswish
-        console.log('new item added', newItem);
-        return newItem;
+        console.log('storage ref?', inputs);
 
+        task.on('state_changed', (snapshot) => {
+            console.log(`${snapshot.bytesTransferred} transferred out of ${snapshot.totalBytes}`,);
+        });
+
+        try {
+            await task;
+            const url = await storageRef.getDownloadURL();
+            return url;
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     } catch (e) {
         console.log(e)
     }
-
 }
 
+const postWishStore = async (newItem, url) => {
+    const {title, description} = newItem;
 
-export {doLogin, doRegister, postStore, doAddItemWish, postItem};
+    // posts inputs and img url for storage
+    try {
+        //console.log(title, url)
+
+        const task = await projectFirestore
+            .collection('itemswish')
+            .add({
+                title: title,
+                description: description,
+                url: url,
+            })
+            .then(() => {
+                console.log('Post Added!');
+            })
+        return task;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export {doLogin, doRegister, postStore, postWishImg, postItem, postWishStore};

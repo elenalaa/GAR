@@ -20,6 +20,9 @@ import {Entypo} from '@expo/vector-icons';
 import WishItem from '../views/WishItem';
 import AddItemWish from '../views/AddItemWish';
 import firebase from '../firebase/config';
+import Borrow from '../views/Borrow';
+import Reservations from '../views/Reservations';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -73,14 +76,22 @@ const StackScreen = () => {
                         }}
 
                     />
+                    {/* Item screens*/}
                     <Stack.Screen name="Items" component={Items} />
                     <Stack.Screen name="Product" component={Product} />
                     <Stack.Screen name="AddItem" component={AddItem} />
-                    <Stack.Screen name="Calendars" component={Calendars} />
-                    <Stack.Screen name="BorrowedItems" component={BorrowedItems} />
+
+                    {/** wish list screens */}
                     <Stack.Screen name="WishList" component={WishList} />
                     <Stack.Screen name="AddItemWish" component={AddItemWish} />
                     <Stack.Screen name="WishItem" component={WishItem} />
+
+                    {/** Borrowing and reservation screens */}
+                    <Stack.Screen name="Calendars" component={Calendars} />
+                    <Stack.Screen name="BorrowedItems" component={BorrowedItems} />
+                    <Stack.Screen name="Borrow" component={Borrow} />
+                    <Stack.Screen name="Reservations" component={Reservations} />
+
                 </>
             ) : (
                 <>
