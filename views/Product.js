@@ -6,6 +6,7 @@ import { Card, ListItem } from 'react-native-elements';
 
 const Product = (props) => {
   const item = props.route.params.item;
+  const {navigation} = props;
 
   /* const [date, setDate] = useState(new Date())
   const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
@@ -40,20 +41,31 @@ const Product = (props) => {
         <Text style={styles.listTitle}>{item.title}</Text>
         {/* <Text>description</Text> */}
         <Text>{item.description}</Text>
-        <Text>{item.type}</Text>
-        <Text>Code: {item.code}</Text>
-        <Text style={styles.listCategory}>{item.category}</Text>
-        </View>
-     
-      {/*   <Button title="Show Date Picker" onPress={showDatePicker} /> 
-         <DatePicker
-          date={date}
-          onDateChange={setDate}
-          mode="date"
-        />   */}  
-    </Card>
+      </View>
+      <View style={styles.view}>
+        <Button style={styles.button}
+          title="Reservations"
+          color="orange"
+          onPress={() => navigation.navigate('Reservations')}
+        />
+        <Button style={styles.button}
+          title="Borrow"
+          onPress={() => navigation.navigate('Borrow')
+          }
+        />
+        {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
+        {/*  <DatePicker
+         
+        date={date}
+        onDateChange={setDate}
+        mode="date"
+      />    */}
+
+      </View>
+    </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

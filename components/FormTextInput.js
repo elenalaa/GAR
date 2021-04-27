@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 });
 
 FormTextInput.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.number,
 };
 
 export default FormTextInput;

@@ -5,7 +5,6 @@ import {Ionicons} from '@expo/vector-icons';
 import {ThemeProvider, Button} from 'react-native-elements';
 import {Feather} from '@expo/vector-icons';
 import {FontAwesome5} from '@expo/vector-icons';
-import {MaterialIcons} from '@expo/vector-icons';
 
 
 const window = Dimensions.get("window");
@@ -72,20 +71,6 @@ const HomeAdmin = ({navigation}) => {
                         navigation.navigate('WishList')
                     }
                 />
-
-                <Button
-                    icon={
-                        <MaterialIcons
-                            name="login"
-                            size={72}
-                            color="white" />
-                    }
-                    title="  LOG" onPress={() =>
-                        navigation.navigate('Home')
-                    }
-                />
-
-
             </ThemeProvider>
         </SafeAreaView>
     );
@@ -101,14 +86,14 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         marginVertical: 20,
 
-      
+
     },
     button: {
         borderRadius: 4,
         paddingTop: 10,
     }
 
-  
+
 });
 
 HomeAdmin.propTypes = {

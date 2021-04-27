@@ -1,30 +1,25 @@
-import { useState } from 'react';
 
-const useAddItemWishForm = (callback) => {
-   const [inputs, setInputs] = useState({
-        title: '',
-        description: '',
-       
-       
-        
-    });
+import {useState} from 'react';
 
-    const handleInputChange = (name, text) => {
-      console.log(name, text);
-        setInputs((inputs) => {
-          return {
-            ...inputs,
-            [name]: text,
-          };
-      });
-    };
+const useWishForm = (callback) => {
+  const [inputs, setInputs] = useState({
+    title: '',
+    description: '',
+  });
 
-     
-  return {
-        handleInputChange,
-        inputs,
-        
+  const handleInputChange = (name, text) => {
+    console.log(name, text);
+    setInputs((inputs) => {
+      return {
+        ...inputs,
+        [name]: text,
       };
-    };
+    });
+  };
+  return {
+    handleInputChange,
+    inputs,
+  };
+};
 
-export default useAddItemWishForm;
+export default useWishForm;

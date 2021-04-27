@@ -1,16 +1,14 @@
 import React, {useEffect, useContext} from "react";
 import {AuthContext} from '../contexts/AuthContext';
 import PropTypes from 'prop-types';
-import RegisterForm from '../components/RegisterForm';
 import LogInForm from '../components/LoginForm';
 import {
     StyleSheet,
-    View,
-    Text,
     ImageBackground,
     Button,
 } from 'react-native';
 import firebase from 'firebase';
+
 
 
 const image = require('../assets/LogoLogo.png')
@@ -32,7 +30,7 @@ const Login = ({navigation}) => {
 
     };
 
-  
+
     useEffect(() => {
         getToken();
     }, []);
@@ -55,6 +53,7 @@ const Login = ({navigation}) => {
     );
 };
 
+// <ImageBackground source={image} style={styles.imageContainer}>  
 
 const styles = StyleSheet.create({
 

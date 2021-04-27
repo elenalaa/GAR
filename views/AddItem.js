@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
-  SafeAreaView, Text, TextInput, View, TouchableOpacity
+  SafeAreaView, Text, TextInput, Image, TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 import useAddItemForm from '../hooks/AddItemHooks';
@@ -96,19 +96,18 @@ const AddItem = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
-      {/* <Text style={styles.title}>Add Item</Text> */}
-        <IconButton
+        <Text style={styles.title}>Add Item</Text>
+        {/* if useState has image shows it, if not shows camera icon,
+            you can press either to choose image */}
+        {!image && <IconButton
           icon="camera"
           size={72}
           onPress={pickImage}>
-        </IconButton>
+        </IconButton>}
+        {image && <TouchableOpacity onPress={pickImage} >
+          <Image source={{uri: image.uri}} style={{width: 200, height: 200}} />
+        </TouchableOpacity>}
 
-        {/* <Image
-          source={{ uri: image }}
-          style={{ width: null, height: 200, flex: 1}}
-          PlaceholderContent={<ActivityIndicator />}
-      /> */}
-        {/* <Form style={styles.form}> */}
         <TextInput style={styles.input}
           autoCapitalize='none'
           placeholder='  Name of the item'
@@ -182,7 +181,7 @@ const AddItem = (props) => {
           onPress={doAddItem}
         />
       </ThemeProvider>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 
