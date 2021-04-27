@@ -1,247 +1,190 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import FormTextInput from '../components/FormTextInput';
-import useAddItemWishForm from '../hooks/AddItemWishHooks';
-import firebase from '../firebase/config.js';
-import { Platform } from 'react-native';
+import useWishForm from '../hooks/AddItemWishHooks';
+import {Platform} from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import { ThemeProvider, Button } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons'; 
-import { IconButton } from 'react-native-paper';
-import {StyleSheet, FlatList,
-  SafeAreaView, Text, Alert, TextInput, ActivityIndicator, Image } from 'react-native';
+import {ThemeProvider, Button} from 'react-native-elements';
+import {Ionicons} from '@expo/vector-icons';
+import {postWishImg, postWishStore} from '../hooks/ApiHooks';
+import {IconButton} from 'react-native-paper';
+import {
+  StyleSheet,
+  SafeAreaView, Text, TextInput, Image, TouchableOpacity
+} from 'react-native';
 
 
 
 
 const AddItemWish = (props) => {
   const {navigation} = props;
-  const { handleInputChange, inputs } = useAddItemWishForm();
-  const [isLoading, setIsLoading] = useState(false);
+  const {inputs, handleInputChange} = useWishForm();
   const [image, setImage] = useState(null);
 
   const doAddItemWish = async () => {
-    setIsLoading(true);
-    //try {
-      //const userToken = await AsyncStorage.getItem('userToken');
-      const formData = new FormData();
-      const data = {
-        description: inputs.description,
-        title: inputs.title,
-        amount: inputs.amount,
-        code: inputs.code 
-      };
-      
-      formData.append('title', inputs.title);
-      formData.append('description', inputs.description);
-      formData.append('amount', inputs.amount);
-      formData.append('code', inputs.code); 
 
-      console.log(data)
-      addNewItemWish(data);
-     }
-     
-      const addNewItemWish = (item) => {
-        firebase.firestore().collection('itemswish').add({
-          title: item.title,
-          description: item.description,
-          amount: item.amount,
-          code: item.code,
-         //image: item.filename,
-        });
-        
-        Alert.alert('Action!', 'A new item was created');
+    console.log(inputs)
 
+
+    try {
+      // image to blob
+      const response = await fetch(image.uri);
+      const blob = await response.blob();
+
+      // post item and get url
+      const imgUrl = await postWishImg(blob, inputs)
+      console.log(imgUrl)
+
+      try {
+        //puts info in firestore if imgurl ok
+        await imgUrl;
+        const db = await postWishStore(inputs, imgUrl);
+        console.log(db);
+      } catch (e) {
+        console.log('db things: ', e)
       }
+      setImage(null)
+    } catch (e) {
+      console.log('doAddItem nappi', e)
+    }
+  }
 
-      const getPermissionAsync = async () => {
-        //Get permissions
-        if (Platform.OS !== 'web') {
-          const { status } = await Permissions.askAsynk(Permissions.CAMERA);
-          if(status !== 'granted') {
-            alert('Sorry, we need camera roll permissions to make this work!');
-          }
-        }
+
+
+
+  const getPermissionAsync = async () => {
+    //Get permissions
+    if (Platform.OS !== 'web') {
+      const {status} = await Permissions.askAsynk(Permissions.CAMERA);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
       }
+    }
+  }
 
-      useEffect(() => {
-        getPermissionAsync();
-      }
-      );
+  useEffect(() => {
+    getPermissionAsync();
+  }
+  );
 
-      const pickImage = async () => {
-        //Image Picker
-        try {
-          const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-          }).then((result)=> {
-          if (!result.cancelled) {
-            const {height, width, type, uri} = result;
-            console.log('image h ', height);
-            console.log('image w ', width);
-            console.log('image type ', type);
-            console.log('image picked', uri);
-            setImage(result.uri);
-            console.log(image);
-           //saveImage(uri);
-           uriToBlob(uri);
-            
-          }
-        }).then((blob) => {
+  const pickImage = async () => {
+    // toimii
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    console.log(inputs)
 
-        console.log(result);
-         saveImage(blob);
-        })
-        } catch (E) {
-          console.log(E);
-        }
-      };
-      const uriToBlob = (uri) => {
-        return new Promise((resolve, reject) => {
-          const xhr = new XMLHttpRequest();
-          xhr.onload = function() {
-            // return the blob
-            resolve(xhr.response);
-          };
-          
-          xhr.onerror = function() {
-            // something went wrong
-            reject(new Error('uriToBlob failed'));
-          };
-          // this helps us get a blob
-          xhr.responseType = 'blob';
-          xhr.open('GET', uri, true);
-          
-          xhr.send(null);
-        });
-      }
+    console.log(result);
+    //console.log('mitä tää on: ', result.uri)
 
-      const saveImage = async (blob) => {
-      
-        firebase.storage().ref('public/').put(blob, {contentType: 'image/jpg'}).then(function (snapshot) {
-          console.log('Uploaded a blob or file!');
-      });
-      
-      }
+    if (!result.cancelled) {
+      setImage(result);
+    }
+  };
 
-      const theme = {
-        colors: {
-          primary: '#124191',
-        },
-      };
 
- return (
+
+  const theme = {
+    colors: {
+      primary: '#124191',
+    },
+  };
+
+
+  return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
-      <Text style={styles.title}>Add Item</Text>
-      <IconButton 
-        icon="camera"
-        size={72}
-        onPress={pickImage}>
-      </IconButton>
-  {/* <Image
-          source={{ uri: image }}
-          style={{ width: null, height: 200, flex: 1}}
-          PlaceholderContent={<ActivityIndicator />}
-      /> */}
-  {/* <Form style={styles.form}> */}
-      <TextInput style={styles.input}
-          autoCapitalize= 'none'
+        <Text style={styles.title}>Add Item</Text>
+
+        {/* if useState has image shows it, if not shows camera icon,
+            you can press either to choose image */}
+        {!image && <IconButton
+          icon="camera"
+          size={72}
+          onPress={pickImage}>
+        </IconButton>}
+        {image && <TouchableOpacity onPress={pickImage} >
+          <Image source={{uri: image.uri}} style={{width: 200, height: 200}} />
+        </TouchableOpacity>}
+
+        <TextInput style={styles.input}
+          autoCapitalize='none'
           placeholder='  Name of the item'
           placeholderTextColor='black'
           value={inputs.title}
           onChangeText={(txt) => handleInputChange('title', txt)}
-         // error={addItemErrors.title}
+        // error={addItemErrors.title}
         />
-        <TextInput  style={styles.inputDes}
-          autoCapitalize= 'none'
+        <TextInput style={styles.inputDes}
+          autoCapitalize='none'
           placeholder='  Description'
           placeholderTextColor='black'
           value={inputs.description}
           onChangeText={(txt) => handleInputChange('description', txt)}
-         // error={addItemErrors.description}
-        />  
-         <TextInput  style={styles.input}
-          autoCapitalize= 'none'
-          placeholder='  Amount'
-          placeholderTextColor='black'
-          value={inputs.amount}
-          onChangeText={(txt) => handleInputChange('amount', txt)}
-         // error={addItemErrors.amount}
-        />  
-        <TextInput  style={styles.input}
-          autoCapitalize= 'none'
-          placeholder='  Code'
-          placeholderTextColor='black'
-          value={inputs.code}
-          onChangeText={(txt) => handleInputChange('code', txt)}
-         // error={addItemErrors.code}
-        />   
-     {/* </Form> */}
+        // error={addItemErrors.description}
+        />
         <Button color='#124191'
-        icon={
-          <Ionicons 
-            name="add-circle"
-            size={72}
-            color="white"
-          />
-        }
+          icon={
+            <Ionicons
+              name="add-circle"
+              size={72}
+              color="white"
+            />
+          }
           title="  ADD ITEM TO WISHLIST"
           onPress={doAddItemWish}
         />
-        </ThemeProvider>
-      </SafeAreaView>
-   );
-  }
-    
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#EDF2F5',
-      margin: 20,
-      justifyContent: 'space-between',
-      alignSelf: 'stretch',
-      marginVertical: 20,
-    },
-    input: {
-      height: 47,
-      margin: 8,
-      borderWidth: 1,
-      borderRadius: 4,
-      borderColor:'#FF3154',
-      backgroundColor: '#fff',
-    },
-    inputDes: {
-      height: 129 ,
-      margin: 8,
-      borderWidth: 1,
-      borderRadius: 4,
-      borderColor:'#FF3154',
-      backgroundColor: '#fff',
-    },
-    item: {
-        backgroundColor: '#f9c2ff',
-        padding: 10,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 32,
-    },
-   
-  
-}); 
- 
+      </ThemeProvider>
+    </SafeAreaView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#EDF2F5',
+    margin: 20,
+    justifyContent: 'space-between',
+    alignSelf: 'stretch',
+    marginVertical: 20,
+  },
+  input: {
+    height: 47,
+    margin: 8,
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#FF3154',
+    backgroundColor: '#fff',
+  },
+  inputDes: {
+    height: 129,
+    margin: 8,
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#FF3154',
+    backgroundColor: '#fff',
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+
+
+});
+
 AddItemWish.propTypes = {
-   route: PropTypes.object,
+  route: PropTypes.object,
   // navigation:PropTypes.object,
 };
 
-    
+
 export default AddItemWish;

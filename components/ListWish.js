@@ -41,46 +41,47 @@ import firebase from '../firebase/config.js';
       'filename': 'https://upload.wikimedia.org/wikipedia/commons/4/45/Raspberry_Pi_-_Model_A.jpg', 
      
     },
-  ];  */ 
+  ];  */
 
 
- 
+
+
 const ListWish = ({navigation}) => {
-    const [items, setItems] = useState(false);
-    useEffect(() => {
-      // write your code here, it's like componentWillMount
-      getItems();
-    }, [])
-    const getItems = async () => {
-      const ref = firebase.firestore().collection('itemswish');
-      return ref.onSnapshot(querySnapshot => {
-        const list = [];
-        querySnapshot.forEach(doc => {
-          const { title, description, amount, code } = doc.data();
-          list.push({
-            id: doc.id,
-            title,
-            description,
-            amount,
-            code,
-            
-          });
+  const [items, setItems] = useState(false);
+  useEffect(() => {
+    // write your code here, it's like componentWillMount
+    getItems();
+  }, [])
+  const getItems = async () => {
+    const ref = firebase.firestore().collection('itemswish');
+    return ref.onSnapshot(querySnapshot => {
+      const list = [];
+      querySnapshot.forEach(doc => {
+        const {title, description, amount, code, url} = doc.data();
+        list.push({
+          key: doc.id,
+          title,
+          description,
+          amount,
+          code,
+          url
         });
-  
-        setItems(list);
+      });
+
+      setItems(list);
     });
-}
-   return (
-     <FlatList
-        data={items}
-        keyExtractor={item => item.key}
-        renderItem={({item}) =>
-        <ListItemWish 
-        navigation={navigation} 
-        item={item} />
+  }
+  return (
+    <FlatList
+      data={items}
+      keyExtractor={item => item.key}
+      renderItem={({item}) =>
+        <ListItemWish
+          navigation={navigation}
+          item={item} />
       }
     />
-    
+
   );
 };
 

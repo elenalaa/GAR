@@ -36,12 +36,12 @@
     "react-native-date-picker": "^3.2.10",
     "react-native-elements": "^3.3.2",
     "react-native-fetch-blob": "^0.10.8",
-    "react-native-gesture-handler": "^1.8.0",
+    "react-native-gesture-handler": "^1.9.0",
     "react-native-paper": "^4.7.2",
     "react-native-reanimated": "^1.13.3",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.2",
-    "react-native-web": "~0.13.12",
+    "react-native-web": "^0.14.4",
     "undefined": "@react-native-community/"
   },
   "private": true

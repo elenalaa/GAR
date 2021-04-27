@@ -27,6 +27,7 @@ const LogInForm = ({navigation}) => {
     const {inputs, handleInputChange} = useLoginForm();
 
 
+
     return (
         <View>
             <FormTextInput style={styles.containerForm}
