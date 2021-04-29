@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
-  SafeAreaView, Text, TextInput, Image, TouchableOpacity
+  SafeAreaView, Text, TextInput, Image, TouchableOpacity, View
 } from 'react-native';
 import PropTypes from 'prop-types';
 import useAddItemForm from '../hooks/AddItemHooks';
@@ -13,6 +13,7 @@ import {Ionicons} from '@expo/vector-icons';
 import {IconButton} from 'react-native-paper';
 import {CheckBox} from 'react-native-elements';
 import {postItem, postStore} from '../hooks/ApiHooks';
+import {MaterialIcons} from "@expo/vector-icons";
 
 
 
@@ -22,8 +23,15 @@ const AddItem = (props) => {
 
   const {inputs, handleInputChange} = useAddItemForm();
   const state = {selectedLang: 0};
-  const [category, setCategory] = useState(null)
 
+  const [categoryIndex, setCategoryIndex] = useState(0);
+  const categoryList = ["Free Use", "Borrow", "Reservation"];
+
+  const categoryChangeHandler =
+    (index) => {
+      console.log("index \t", index);
+      setCategoryIndex((preIndex) => index);
+    }
 
   const doAddItem = async () => {
 
@@ -40,7 +48,8 @@ const AddItem = (props) => {
       try {
         //puts info in firestore if imgurl ok
         await imgUrl;
-        const db = await postStore(inputs, imgUrl);
+        const db = await postStore(inputs, imgUrl, categoryList[categoryIndex]);
+
         console.log(db);
       } catch (e) {
         console.log('db things: ', e)
@@ -137,27 +146,34 @@ const AddItem = (props) => {
         />
         {/* </Form> */}
 
-        <CheckBox checked={state.selectedLang === 1} color="#fc5185" onPress={() => setCategory({selectedLang: 1})} />
-        <Text style={
-          {
-            ...styles.checkBoxTxt,
-            color: state.selectedLang === 1 ? "#fc5185" : "gray",
-            fontWeight: state.selectedLang === 1 ? "bold" : "normal"
-          }}>BORROW</Text>
-        <CheckBox checked={state.selectedLang === 1} color="#fc5185" onPress={() => setCategory({selectedLang: 1})} />
-        <Text style={
-          {
-            ...styles.checkBoxTxt,
-            color: state.selectedLang === 1 ? "#fc5185" : "gray",
-            fontWeight: state.selectedLang === 1 ? "bold" : "normal"
-          }}>USE</Text>
-        <CheckBox checked={state.selectedLang === 1} color="#fc5185" onPress={() => setCategory({selectedLang: 1})} />
-        <Text style={
-          {
-            ...styles.checkBoxTxt,
-            color: state.selectedLang === 1 ? "#fc5185" : "gray",
-            fontWeight: state.selectedLang === 1 ? "bold" : "normal"
-          }}>RESERVATION</Text>
+        {/* </Form> */}
+        <View style={{flexDirection: "row"}}>
+          {categoryList.map((data, index) => (
+            <TouchableOpacity
+              key={data}
+              style={{
+                flexDirection: "row",
+                margin: 10,
+                flex: 3,
+                justifyContent: "space-evenly",
+              }}
+              onPress={categoryChangeHandler.bind(this, index)}
+            >
+
+              {/* <AntDesign name="checkcircle" size={24} color="black" />   */}
+              <MaterialIcons
+                name={
+                  index === categoryIndex
+                    ? "radio-button-checked"
+                    : "radio-button-unchecked"
+                }
+                size={18}
+                color='#124191'
+              />
+              <Text style={styles.checkBoxTxt}>{data}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
         <Button color='#124191'
           icon={
             <Ionicons
@@ -218,6 +234,10 @@ const styles = StyleSheet.create({
   },
   checkBoxTxt: {
     marginLeft: 20
+  },
+  checkBox: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
 

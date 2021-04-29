@@ -68,7 +68,7 @@ const postRegister = async (newUser, name) => {
 }
 
 
-const postStore = async (newItem, url) => {
+const postStore = async (newItem, url, category) => {
     const {title, description, type, code} = newItem;
 
     // posts inputs and img url for storage
@@ -83,6 +83,7 @@ const postStore = async (newItem, url) => {
                 type: type,
                 code: code,
                 url: url,
+                category: category,
             })
             .then(() => {
                 console.log('Post Added!');
@@ -180,10 +181,10 @@ const postReservation = async (date, item) => {
     // posts selected date to items reservations
     try {
         const task = await projectFirestore
-            .collection('reservations').doc(item.title)
-            .collection('dates')
+            .collection('item').doc(item.key)
+            .collection(item.category)
             .add({
-                date: date
+                date: date,
             })
             .then(() => {
                 console.log('Post Added!');
@@ -196,8 +197,9 @@ const postReservation = async (date, item) => {
 
 const getReservations = async (product) => {
 
-    var docRef = projectFirestore.collection('reservations').doc(product.title);
-    console.log(product)
+    var docRef = projectFirestore.collection('item').doc(product.key).collection(product.category);
+    console.log('product: ', product)
+
     try {
 
         docRef.get().then((doc) => {

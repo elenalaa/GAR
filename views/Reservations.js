@@ -37,11 +37,11 @@ const Reservations = (props) => {
     const getDates = async () => {
         await getReservations(item)
     }
-
-    useEffect(() => {
-        getDates();
-    }, []);
-
+    /*
+        useEffect(() => {
+            getDates();
+        }, []);
+    */
     return (
         <SafeAreaView style={styles.container}>
             <Fragment>
@@ -65,6 +65,11 @@ const Reservations = (props) => {
                     title="Make reservation"
                     color="orange"
                     onPress={makeReservation}
+                />
+                <Button style={styles.button}
+                    title="GetDates"
+                    color="orange"
+                    onPress={getDates}
                 />
 
                 {selected && <Text>{selected}</Text>}
