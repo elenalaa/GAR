@@ -62,7 +62,7 @@ const Product = (props) => {
       />    */}
 
       </View>
-    </SafeAreaView>
+    </Card>
   );
 };
 
