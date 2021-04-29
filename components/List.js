@@ -29,13 +29,14 @@ const List = ({navigation}) => {
           description,
           category,
           code,
-          url
+          url,
         });
       });
 
       setItems(list);
     });
   }
+
   return (
 
     <FlatList

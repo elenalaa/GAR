@@ -42,8 +42,33 @@ const doRegister = async (userCreds) => {
 }
 
 
+const postRegister = async (newUser, name) => {
+    const {email, uid} = newUser;
 
-const postStore = async (newItem, url) => {
+    console.log(email, uid, name)
+
+    try {
+        //console.log(title, url)
+        const admin = false;
+
+        await projectFirestore
+            .collection('users')
+            .add({
+                name: name,
+                email: email,
+                auth: uid,
+                admin: admin,
+            })
+            .then(() => {
+                console.log('User Added!');
+            })
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+
+const postStore = async (newItem, url, category) => {
     const {title, description, type, code} = newItem;
 
     // posts inputs and img url for storage
@@ -58,6 +83,7 @@ const postStore = async (newItem, url) => {
                 type: type,
                 code: code,
                 url: url,
+                category: category,
             })
             .then(() => {
                 console.log('Post Added!');
@@ -148,4 +174,47 @@ const postWishStore = async (newItem, url) => {
     }
 }
 
-export {doLogin, doRegister, postStore, postWishImg, postItem, postWishStore};
+const postReservation = async (date, item) => {
+
+    console.log(date, item)
+
+    // posts selected date to items reservations
+    try {
+        const task = await projectFirestore
+            .collection('item').doc(item.key)
+            .collection(item.category)
+            .add({
+                date: date,
+            })
+            .then(() => {
+                console.log('Post Added!');
+            })
+        return task;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+const getReservations = async (product) => {
+
+    var docRef = projectFirestore.collection('item').doc(product.key).collection(product.category);
+    console.log('product: ', product)
+
+    try {
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }
+        )
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
+export {doLogin, doRegister, postStore, postWishImg, postItem, postWishStore, postReservation, getReservations, postRegister};

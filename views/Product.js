@@ -1,32 +1,18 @@
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, Text, View, Image, Alert, Button, Icon} from 'react-native';
 import PropTypes from 'prop-types';
-import {Card} from 'react-native-elements';
+
 
 const Product = (props) => {
   const item = props.route.params.item;
   const {navigation} = props;
 
-  //const [date, setDate] = useState(new Date())
-  //const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  /* const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  }; 
-
-  const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
-    hideDatePicker();
-  };   */
 
   return (
 
     <SafeAreaView style={styles.container}>
       <Text>Item detail</Text>
+
 
       <View style={styles.imagebox}>
         <Image
@@ -43,20 +29,15 @@ const Product = (props) => {
         <Button style={styles.button}
           title="Reservations"
           color="orange"
-          onPress={() => navigation.navigate('Reservations')}
+          onPress={
+            () => navigation.navigate('Reservations', {item: item})
+          }
         />
         <Button style={styles.button}
           title="Borrow"
           onPress={() => navigation.navigate('Borrow')
           }
         />
-        {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
-        {/*  <DatePicker
-         
-        date={date}
-        onDateChange={setDate}
-        mode="date"
-      />    */}
 
       </View>
     </SafeAreaView>
