@@ -36,6 +36,7 @@ const List = ({navigation}) => {
       setItems(list);
     });
   }
+
   return (
 
     <FlatList

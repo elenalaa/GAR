@@ -1,57 +1,74 @@
-import React, {useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     StyleSheet,
     SafeAreaView, Text, View, Button, Platform
 } from 'react-native';
+import {Calendar, CalendarList} from 'react-native-calendars';
+import {getReservations, postReservation} from '../hooks/ApiHooks';
 
 
 const Reservations = (props) => {
-    const {navigation} = props;
+    //const {navigation} = props;
 
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
+    const [selected, setSelected] = useState('');
+    const item = props.route.params.item;
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
+    const onDayPress = day => {
+        setSelected(day.dateString);
+        console.log(props)
     };
 
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
+    const makeReservation = async () => {
+        try {
+            if (selected) {
+                const what = await postReservation(selected, item)
+                //console.log(selected)
+                setSelected('')
+            } else {
+                console.log('tyhjä')
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
-    const showDatepicker = () => {
-        showMode('date');
-        console.log(date)
-    };
 
+    const getDates = async () => {
+        await getReservations(item)
+    }
 
+    useEffect(() => {
+        getDates();
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Reservations HERE</Text>
-            <View>
-                <View>
-                    <Button onPress={showDatepicker} title="Show date picker!" />
-                </View>
-                {show && (
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        value={date}
-                        mode={mode}
-                        is24Hour={true}
-                        display="default"
-                        onChange={onChange}
-                    />
-                )}
-                {date && <Text>{date.toString()}</Text>}
-            </View>
+            <Fragment>
 
+                <Text style={styles.text}>Reservations for {item.title}</Text>
+                <Calendar
+                    current={'2021-04-28'}
+                    horizontal={true}
+                    style={styles.calendar}
+                    onDayPress={onDayPress}
+                    markedDates={{
+                        [selected]: {
+                            selected: true,
+                            disableTouchEvent: true,
+                            selectedColor: 'orange',
+                            selectedTextColor: 'red'
+                        }
+                    }}
+                />
+                <Button style={styles.button}
+                    title="Make reservation"
+                    color="orange"
+                    onPress={makeReservation}
+                />
+
+                {selected && <Text>{selected}</Text>}
+            </Fragment>
         </SafeAreaView>
     );
 };
@@ -61,8 +78,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#EDF2F5',
         alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 40,
+        justifyContent: 'top',
+        paddingTop: 10,
     },
     item: {
         backgroundColor: '#f9c2ff',
@@ -73,11 +90,22 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
     },
+    calendar: {
+        marginBottom: 10,
+        marginLeft: 10,
+        marginRight: 10,
+    },
+    text: {
+        textAlign: 'center',
+        padding: 10,
+        backgroundColor: 'lightgrey',
+        fontSize: 16
+    }
 
 });
 
 Reservations.propTypes = {
-    route: PropTypes.object,
+    navigation: PropTypes.object,
 };
 
 

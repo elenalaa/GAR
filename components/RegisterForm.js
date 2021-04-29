@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
+import React, {useContext, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import FormTextInput from './FormTextInput';
 import {StyleSheet, Button, View} from 'react-native';
 import useSignUpForm from '../hooks/RegisterHooks';
-import {doRegister} from '../hooks/ApiHooks';
+import {doRegister, postRegister} from '../hooks/ApiHooks';
 import {AuthContext} from '../contexts/AuthContext';
 
 
@@ -15,7 +15,9 @@ const RegisterForm = ({navigation}) => {
             // apihooks doRegister tries to make new user and returns it userData
             const newUser = await doRegister(inputs);
             console.log('uus käyttäjä luotu: ', newUser);
+            const {user} = newUser;
             if (newUser) {
+                const db = await postRegister(user, inputs.full_name);
                 setIsLoggedIn(true);
             }
         } catch (e) {
