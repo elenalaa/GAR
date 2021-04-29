@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 320,
     backgroundColor: '#fff',
-    fontSize: 24,
+    fontSize: 18,
     color: "black",
 
   },
