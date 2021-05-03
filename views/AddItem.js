@@ -50,7 +50,11 @@ const AddItem = (props) => {
         //puts info in firestore if imgurl ok
         await imgUrl;
         const db = await postStore(inputs, imgUrl, categoryList[categoryIndex]);
-
+        handleInputChange('title', '')
+        handleInputChange('description', '')
+        handleInputChange('type', '')
+        handleInputChange('code', '')
+        alert("Item added!")
         console.log(db);
       } catch (e) {
         console.log('db things: ', e)
@@ -61,7 +65,7 @@ const AddItem = (props) => {
     }
   }
   else{
-    
+    alert("Fill filds")
     console.log(addItemErrors.title)
     console.log(addItemErrors.description)
     console.log(addItemErrors.type)

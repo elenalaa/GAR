@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, TouchableOpacity} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 //import { ListItem as CoolListItem, Thumbnail, Left, Body } from 'native-base';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
@@ -10,11 +10,13 @@ import { render } from 'react-dom';
 import { SafeAreaView } from 'react-native';
 import { TextInput } from 'react-native';
 //import storage from '@react-native-firebase/storage';
-
+import { SearchBar } from 'react-native-elements';
 
 
 const List = ({navigation}) => {
   const [items, setItems] = useState(false);
+  const [search, setSearch] = useState('');
+  const [fulldata, setFulldata] = useState();
   useEffect(() => {
     // write your code here, it's like componentWillMount
     getItems();
@@ -36,47 +38,44 @@ const List = ({navigation}) => {
       });
 
       setItems(list);
+      setFulldata(list);
     });
   };
 
-  const [ searsh, setSearch ] = useState();
-  const [ filteredDataSource, setFilteredDataSourse ] = useState();
-  const [ masterDataSource, setMasterDataSource ] = useState();
-   
+
   const searchFilterFunction = (text) => {
-      //check if searchBar text is not blank
-      if (text) {
-        //Insert text is not blank
-        //Filter the masterDataSource
-        //Update filtered data Source
-     
-    const newData = masterDataSource.filter(
-          function (item) {
-            const itemData = item.title
-            ? item.title.toUpperCase()
-            : ''.toUpperCase();
-            const textData = text.toUpperCase();
-            return itemData.indexOf(textData) > -1;
-          }
-        ); 
-        setFilteredDataSourse(newData);
-        setSearch(text);
-      } else {
-        //Inserted text is blank
-        //Update FilteredDataSource with MasterDataSource
-        setFilteredDataSourse(masterDataSource);
-        setSearch(text);
-      }
-    };
+      // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Update FilteredData
+      const newData = fulldata.filter(function (item) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setItems(newData);
+      setSearch(text);
+    } else {
+      setItems(fulldata);
+      setSearch(text);
+    }
+  };
+
+
 
   return (
   <SafeAreaView>
-    <TextInput style={{height: 40, borderWidth: 1, borderRadius: 4, paddingLeft: 20, margin: 5, borderColor: '#124191', backgroundColor: '#FFFFFF'}}
-   // onChangeText={(text) => searchFilterFunction(text)}
-    value={searsh}
-    placeholder="Search Here..."
-    >
-    </TextInput>
+    <View>
+        <SearchBar
+          round
+          searchIcon={{size: 24}}
+          onChangeText={(text) => searchFilterFunction(text)}
+          onClear={(text) => searchFilterFunction('')}
+          placeholder="Type Here..."
+          value={search}
+        />
     <FlatList
       data={items}
       keyExtractor={item => item.key}
@@ -87,6 +86,7 @@ const List = ({navigation}) => {
           
       }
     />
+    </View>
     </SafeAreaView>
   );
 };
