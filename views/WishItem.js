@@ -1,66 +1,36 @@
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, Text, View, Image, Alert, Button, Icon} from 'react-native';
 import PropTypes from 'prop-types';
+import {Card, CardItem, Content, Container} from 'react-native-elements';
+
 
 
 const WishItem = (props) => {
   const item = props.route.params.item;
 
-  //const [date, setDate] = useState(new Date())
+  
+return (
 
-  //const [isDatePiskerVisible, setDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-
-    setDatePickerVisibility(true);
-  };
-
-  /* const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  }; 
-
-  const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
-    hideDatePicker();
-  };   */
-
-  return (
-
-    <SafeAreaView style={styles.container}>
-      <Text>Wish Item detail</Text>
-
-      <View style={styles.imagebox}>
-
-        <Image
+    //<SafeAreaView style={styles.container}>
+    <Card>
+      <Card.Title>Wish Item detail</Card.Title>
+      <Card.Divider/>
+         <Image
           style={styles.logo}
+          resizeMode="cover"
           source={{uri: item.url}}
         />
-      </View>
+      
       <View style={styles.textbox}>
         {/* <Text>description</Text> */}
         <Text style={styles.listTitle}>{item.title}</Text>
         <Text>{item.description}</Text>
       </View>
       <View style={styles.view}>
-        {/* <Button style={styles.button}
-          title="Use"
-          color="orange"
-          onPress={() => Alert.alert('Button pressed')}
-          />
-        <Button style={styles.button}
-          title="Borrow"
-          onPress={() => Alert.alert('Button pressed')}
-          /> */}
-        {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
-        {/*  <DatePicker
-         
-        date={date}
-        onDateChange={setDate}
-        mode="date"
-      />    */}
+        
       </View>
-
-    </SafeAreaView>
+</Card>
+    //</SafeAreaView>
   );
 };
 

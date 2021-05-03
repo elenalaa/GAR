@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 
+import { SafeAreaView } from 'react-native';
+
+import { ListItem } from 'react-native-elements';
 
 const MyListItemWish = ({item, navigation}) => {
   //navigation, productArray}) => {
@@ -13,20 +16,20 @@ const MyListItemWish = ({item, navigation}) => {
       }
     }>
       <View>
-        <View style={styles.imagebox}>
+        <ListItem bottomDivider>
           <Image
             style={styles.tinyLogo}
             source={{uri: item.url}}
           />
-        </View>
-        <View style={styles.textbox}>
-          <Text style={styles.listTitle}>{item.title}</Text>
-          <Text>{item.description}</Text>
-          <Image source={{uri: item.url}}></Image>
-
-        </View>
+        <ListItem.Content>
+          <ListItem.Title>{item.title}</ListItem.Title>
+          <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron/>
+        </ListItem>
       </View>
     </TouchableOpacity>
+    
   );
 };
 
