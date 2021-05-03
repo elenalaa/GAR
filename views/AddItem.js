@@ -21,7 +21,7 @@ const AddItem = (props) => {
   const {navigation} = props;
   const [image, setImage] = useState(null);
 
-  const {inputs, handleInputChange} = useAddItemForm();
+  const {inputs, handleInputChange, addItemErrors, validateOnSend} = useAddItemForm();
   const state = {selectedLang: 0};
 
   const [categoryIndex, setCategoryIndex] = useState(0);
@@ -34,7 +34,8 @@ const AddItem = (props) => {
     }
 
   const doAddItem = async () => {
-
+    console.log(validateOnSend(inputs))
+    if(validateOnSend(inputs)){
 
     try {
       // image to blob
@@ -58,6 +59,14 @@ const AddItem = (props) => {
     } catch (e) {
       console.log('doAddItem nappi', e)
     }
+  }
+  else{
+    
+    console.log(addItemErrors.title)
+    console.log(addItemErrors.description)
+    console.log(addItemErrors.type)
+    console.log(addItemErrors.code)
+  }
   };
 
 
@@ -111,42 +120,44 @@ const AddItem = (props) => {
           <Image source={{uri: image.uri}} style={{width: 200, height: 200}} />
         </TouchableOpacity>}
 
+      {/* <Form> */}
         <TextInput style={styles.input}
           autoCapitalize='none'
           placeholder='  Name of the item'
           placeholderTextColor='black'
           value={inputs.title}
           onChangeText={(txt) => handleInputChange('title', txt)}
-        // error={addItemErrors.title}
+          error={addItemErrors.title}
         />
+        <Text style={{color:'#777', marginLeft: 10}}>{addItemErrors.title}</Text>
         <TextInput style={styles.inputDes}
           autoCapitalize='none'
-
+          multiline
           placeholder='  Description'
           placeholderTextColor='black'
           value={inputs.description}
           onChangeText={(txt) => handleInputChange('description', txt)}
-        // error={addItemErrors.description}
+          error={addItemErrors.description}
         />
+        <Text style={{color:'#777', marginLeft: 10}}>{addItemErrors.description}</Text>
         <TextInput style={styles.input}
           autoCapitalize='none'
           placeholder='  Type'
           placeholderTextColor='black'
           value={inputs.type}
           onChangeText={(txt) => handleInputChange('type', txt)}
-        // error={addItemErrors.amount}
+          error={addItemErrors.type}
         />
+        <Text style={{color:'#777', marginLeft: 10}}>{addItemErrors.type}</Text>
         <TextInput style={styles.input}
           autoCapitalize='none'
           placeholder='  Code'
           placeholderTextColor='black'
           value={inputs.code}
           onChangeText={(txt) => handleInputChange('code', txt)}
-        // error={addItemErrors.code}
+          error={addItemErrors.code}
         />
-        {/* </Form> */}
-
-        {/* </Form> */}
+        <Text style={{color:'#777', marginLeft: 10}}>{addItemErrors.code}</Text>
         <View style={{flexDirection: "row"}}>
           {categoryList.map((data, index) => (
             <TouchableOpacity

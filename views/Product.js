@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {StyleSheet, SafeAreaView, Text, View, Image, Alert, Button, Icon} from 'react-native';
+import {StyleSheet, Text, View, Image, Alert, Button, Icon} from 'react-native';
 import PropTypes from 'prop-types';
+import {Card, CardItem, Content, Container} from 'react-native-elements';
 
 
 const Product = (props) => {
@@ -9,21 +10,20 @@ const Product = (props) => {
 
 
   return (
-
-    <SafeAreaView style={styles.container}>
-      <Text>Item detail</Text>
-
-
-      <View style={styles.imagebox}>
+    <Card>
+      <Card.Title>Item detail</Card.Title>
+        <Card.Divider/>
+        <View>
         <Image
           style={styles.logo}
+          resizeMode='cover'
           source={{uri: item.url}}
         />
-      </View>
-      <View style={styles.textbox}>
-        <Text>description</Text>
         <Text style={styles.listTitle}>{item.title}</Text>
         <Text>{item.description}</Text>
+        <Text>{item.type}</Text>
+        <Text>{item.code}</Text>
+        <Text>{item.cstegory}</Text>
       </View>
       <View style={styles.view}>
         {item.category == 'Reservation' &&
@@ -44,7 +44,7 @@ const Product = (props) => {
           <Text style={styles.listTitle}>You can use this item freely!</Text>}
 
       </View>
-    </SafeAreaView>
+    </Card>
   );
 };
 
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: 250,
-    height: 250,
+    minWidth: 200,
+    minHeight: 200,
   },
 
   button: {

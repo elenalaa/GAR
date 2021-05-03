@@ -4,6 +4,7 @@ import {StyleSheet, TouchableOpacity,
 import PropTypes from 'prop-types';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
+import {SearchBar} from 'react-native-elements';
 
 
 const Items = (props) => {
@@ -23,9 +24,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#EDF2F5',
-        alignItems: 'center',
-        justifyContent: 'center',
         paddingTop: 10,
+        margin: 5,
     },
     item: {
         backgroundColor: '#f9c2ff',
