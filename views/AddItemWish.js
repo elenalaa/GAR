@@ -97,7 +97,7 @@ const AddItemWish = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
-        <Text style={styles.title}>Add Item</Text>
+        <Text style={styles.title}>Add New Wish Item</Text>
 
         {/* if useState has image shows it, if not shows camera icon,
             you can press either to choose image */}
@@ -176,6 +176,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    color: '#124191',
+    
   },
 
 

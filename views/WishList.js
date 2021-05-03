@@ -26,9 +26,8 @@ const WishList = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <ThemeProvider theme={theme}>
-        <Text>WishList</Text>
+        
         <ListWish navigation={navigation}></ListWish>
         <Button
           icon={
@@ -43,11 +42,8 @@ const WishList = (props) => {
             navigation.navigate('AddItemWish')
 
           }
-
-
         />
       </ThemeProvider>
-
     </SafeAreaView>
   );
 };
@@ -56,11 +52,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#EDF2F5',
-    margin: 20,
+    margin: 5,
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignSelf: 'stretch',
-    marginVertical: 30,
+    marginVertical: 10,
   },
   card: {
     backgroundColor: '#EDF2F5',
