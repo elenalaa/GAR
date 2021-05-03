@@ -26,18 +26,22 @@ const Product = (props) => {
         <Text>{item.cstegory}</Text>
       </View>
       <View style={styles.view}>
-        <Button style={styles.button}
-          title="Reservations"
-          color="orange"
-          onPress={
-            () => navigation.navigate('Reservations', {item: item})
-          }
-        />
-        <Button style={styles.button}
-          title="Borrow"
-          onPress={() => navigation.navigate('Borrow')
-          }
-        />
+        {item.category == 'Reservation' &&
+          <Button style={styles.button}
+            title="Reservations"
+            color="orange"
+            onPress={
+              () => navigation.navigate('Reservations', {item: item})
+            }
+          />}
+        {item.category == 'Borrow' &&
+          <Button style={styles.button}
+            title="Borrow"
+            onPress={() => navigation.navigate('Borrow', {item: item})
+            }
+          />}
+        {item.category == 'Free Use' &&
+          <Text style={styles.listTitle}>You can use this item freely!</Text>}
 
       </View>
     </Card>

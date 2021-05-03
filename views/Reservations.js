@@ -4,19 +4,27 @@ import {
     StyleSheet,
     SafeAreaView, Text, View, Button, Platform
 } from 'react-native';
-import {Calendar, CalendarList} from 'react-native-calendars';
+import {Calendar, CalendarList, ExpandableCalendar} from 'react-native-calendars';
 import {getReservations, postReservation} from '../hooks/ApiHooks';
+import {projectFirestore} from '../firebase/config';
+import {InteractionManager} from 'react-native';
 
 
 const Reservations = (props) => {
     //const {navigation} = props;
-
+    const dates = [];
+    const [items, setItems] = useState('');
     const [selected, setSelected] = useState('');
     const item = props.route.params.item;
+
+    const test = [];
 
     const onDayPress = day => {
         setSelected(day.dateString);
         console.log(props)
+        console.log('dates: ', dates)
+        setItems(dates[0].date)
+
     };
 
     const makeReservation = async () => {
@@ -35,20 +43,44 @@ const Reservations = (props) => {
 
 
     const getDates = async () => {
-        await getReservations(item)
+        var docRef = projectFirestore.collection('item').doc(item.key).collection(item.category);
+        try {
+
+            docRef.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.id, " => ", doc.data());
+                    dates.push(doc.data())
+                });
+            });
+
+        } catch (e) {
+            console.log(e)
+        }
     }
-    /*
-        useEffect(() => {
-            getDates();
-        }, []);
-    */
+
+    useEffect(() => {
+        getDates();
+    }, []);
+
     return (
         <SafeAreaView style={styles.container}>
             <Fragment>
 
-                <Text style={styles.text}>Reservations for {item.title}</Text>
                 <Calendar
-                    current={'2021-04-28'}
+                    current={'2021-05-03'}
+                    style={styles.calendar}
+                    markedDates={{
+                        [items]: {
+                            selected: true,
+                            disableTouchEvent: true,
+                            selectedColor: 'yellow',
+                            selectedTextColor: 'red'
+                        }
+                    }}
+                />
+                <Text style={styles.text}> Make a new reservation</Text>
+                <Calendar
+                    current={'2021-05-03'}
                     horizontal={true}
                     style={styles.calendar}
                     onDayPress={onDayPress}

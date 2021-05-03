@@ -202,17 +202,19 @@ const getReservations = async (product) => {
     var docRef = projectFirestore.collection('item').doc(product.key).collection(product.category);
     console.log('product: ', product)
 
+    const dates = [];
     try {
 
-        docRef.get().then((doc) => {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }
-        )
+
+
+        docRef.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                //console.log(doc.id, " => ", doc.data());
+                dates.push(doc.data())
+            });
+        });
+        return dates;
+
     } catch (e) {
         console.log(e)
     }

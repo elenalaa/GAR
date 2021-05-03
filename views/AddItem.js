@@ -83,8 +83,8 @@ const AddItem = (props) => {
 
   useEffect(() => {
     getPermissionAsync();
-  }
-  );
+  }, []);
+
 
   // toimii
   const pickImage = async () => {
