@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StyleSheet,
+  StyleSheet, ScrollView,
   SafeAreaView, Text, TextInput, Image, TouchableOpacity, View
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -54,7 +54,7 @@ const AddItem = (props) => {
         handleInputChange('description', '')
         handleInputChange('type', '')
         handleInputChange('code', '')
-        alert("Item added!")
+        alert("New Item added!")
         console.log(db);
       } catch (e) {
         console.log('db things: ', e)
@@ -65,7 +65,7 @@ const AddItem = (props) => {
     }
   }
   else{
-    alert("Fill filds")
+    
     console.log(addItemErrors.title)
     console.log(addItemErrors.description)
     console.log(addItemErrors.type)
@@ -111,6 +111,7 @@ const AddItem = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <ThemeProvider theme={theme}>
         <Text style={styles.title}>Add Item</Text>
         {/* if useState has image shows it, if not shows camera icon,
@@ -202,6 +203,7 @@ const AddItem = (props) => {
         />
 
       </ThemeProvider>
+      </ScrollView>
     </SafeAreaView >
   );
 }
@@ -254,8 +256,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-
-
 });
 
 AddItem.propTypes = {

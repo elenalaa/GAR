@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, TouchableOpacity, View} from 'react-native';
-//import { ListItem as CoolListItem, Thumbnail, Left, Body } from 'native-base';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
-//import Items from '../views/Items';
-//import Product from './views/Product';
+
 import firebase from '../firebase/config.js';
 import { render } from 'react-dom';
 import { SafeAreaView } from 'react-native';
@@ -83,7 +81,6 @@ const List = ({navigation}) => {
       <ListItem
           navigation={navigation}
           item={item} />
-          
       }
     />
     </View>

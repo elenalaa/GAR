@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, Alert, Button, Icon} from 'react-native';
 import PropTypes from 'prop-types';
-import {Card, CardItem, Content, Container} from 'react-native-elements';
+import {Card} from 'react-native-elements';
 
 
 const Product = (props) => {
   const item = props.route.params.item;
   const {navigation} = props;
 
+  
 
   return (
     <Card>
@@ -23,7 +24,7 @@ const Product = (props) => {
         <Text>{item.description}</Text>
         <Text>{item.type}</Text>
         <Text>{item.code}</Text>
-        <Text>{item.cstegory}</Text>
+        <Text>{item.category}</Text>
       </View>
       <View style={styles.view}>
         {item.category == 'Reservation' &&
