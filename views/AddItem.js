@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StyleSheet,
+  StyleSheet, ScrollView,
   SafeAreaView, Text, TextInput, Image, TouchableOpacity, View
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -50,7 +50,11 @@ const AddItem = (props) => {
         //puts info in firestore if imgurl ok
         await imgUrl;
         const db = await postStore(inputs, imgUrl, categoryList[categoryIndex]);
-
+        handleInputChange('title', '')
+        handleInputChange('description', '')
+        handleInputChange('type', '')
+        handleInputChange('code', '')
+        alert("New Item added!")
         console.log(db);
       } catch (e) {
         console.log('db things: ', e)
@@ -107,6 +111,7 @@ const AddItem = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <ThemeProvider theme={theme}>
         <Text style={styles.title}>Add Item</Text>
         {/* if useState has image shows it, if not shows camera icon,
@@ -198,6 +203,7 @@ const AddItem = (props) => {
         />
 
       </ThemeProvider>
+      </ScrollView>
     </SafeAreaView >
   );
 }
@@ -250,8 +256,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-
-
 });
 
 AddItem.propTypes = {

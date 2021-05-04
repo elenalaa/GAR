@@ -218,5 +218,4 @@ const getReservations = async (product) => {
 }
 
 
-
 export {doLogin, doRegister, postStore, postWishImg, postItem, postWishStore, postReservation, getReservations, postRegister};

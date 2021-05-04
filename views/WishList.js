@@ -9,8 +9,6 @@ import WishItem from './WishItem';
 import {Ionicons} from '@expo/vector-icons';
 import AddItemWish from './AddItemWish';
 import ListWish from '../components/ListWish';
-import {Card, CardItem, Icon, Content, Container} from 'react-native-elements';
-import {StatusBar} from 'expo-status-bar';
 
 
 
@@ -27,7 +25,6 @@ const WishList = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ThemeProvider theme={theme}>
-        
         <ListWish navigation={navigation}></ListWish>
         <Button
           icon={

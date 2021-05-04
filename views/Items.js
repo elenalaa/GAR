@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity,
-    SafeAreaView, Text } from 'react-native';
+import {
+  StyleSheet, 
+  SafeAreaView } 
+  from 'react-native';
 import PropTypes from 'prop-types';
 import List from '../components/List';
-import ListItem from '../components/ListItem';
-import {SearchBar} from 'react-native-elements';
+
 
 
 const Items = (props) => {
@@ -12,9 +13,6 @@ const Items = (props) => {
 
   return (
       <SafeAreaView style={styles.container}>
-      
-        {/* <Text style={{ fontSize: 32,}}>Items</Text> */}
-        
         <List navigation={navigation}></List>
       </SafeAreaView>
    );

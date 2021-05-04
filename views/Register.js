@@ -19,10 +19,6 @@ const Register = ({navigation}) => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
     imageContainer: {
         flex: 1,
         resizeMode: "cover",
@@ -31,17 +27,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 150,
     },
+    buttonRegister: {
+        marginTop: 10,
+        //fontFamily: 'Nokia Pure Text T',
+    },
     loginForm: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        maxWidth: "49%",
-
-
+        marginTop: 30,
     },
 
 });
+
+
+    
+
+
 
 Register.propTypes = {
     navigation: PropTypes.object,

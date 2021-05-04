@@ -39,6 +39,9 @@ const AddItemWish = (props) => {
         //puts info in firestore if imgurl ok
         await imgUrl;
         const db = await postWishStore(inputs, imgUrl);
+        handleInputChange('title', '')
+        handleInputChange('description', '')
+        alert("New Wish Item added!")
         console.log(db);
       } catch (e) {
         console.log('db things: ', e)
@@ -135,7 +138,8 @@ const AddItemWish = (props) => {
             />
           }
           title="  ADD ITEM TO WISHLIST"
-          onPress={doAddItemWish}
+          onPress={doAddItemWish} 
+          
         />
       </ThemeProvider>
     </SafeAreaView>
