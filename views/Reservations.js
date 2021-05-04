@@ -2,28 +2,27 @@ import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
-    SafeAreaView, Text, View, Button, Platform
+    Text, Button, Platform
 } from 'react-native';
-import {Calendar, CalendarList, ExpandableCalendar} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import {getReservations, postReservation} from '../hooks/ApiHooks';
 import {projectFirestore} from '../firebase/config';
-import {InteractionManager} from 'react-native';
+import {SafeAreaView} from 'react-native';
+
 
 
 const Reservations = (props) => {
-    //const {navigation} = props;
-    const dates = [];
+    const {navigation} = props;
+
     const [items, setItems] = useState('');
     const [selected, setSelected] = useState('');
     const item = props.route.params.item;
-
-    const test = [];
+    const dates = [];
 
     const onDayPress = day => {
         setSelected(day.dateString);
         console.log(props)
         console.log('dates: ', dates)
-        setItems(dates[0].date)
 
     };
 
@@ -44,9 +43,10 @@ const Reservations = (props) => {
 
     const getDates = async () => {
         var docRef = projectFirestore.collection('item').doc(item.key).collection(item.category);
+
         try {
 
-            docRef.get().then((querySnapshot) => {
+            await docRef.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     console.log(doc.id, " => ", doc.data());
                     dates.push(doc.data())
@@ -65,12 +65,11 @@ const Reservations = (props) => {
     return (
         <SafeAreaView style={styles.container}>
             <Fragment>
-
                 <Calendar
                     current={'2021-05-03'}
                     style={styles.calendar}
                     markedDates={{
-                        [items]: {
+                        [selected]: {
                             selected: true,
                             disableTouchEvent: true,
                             selectedColor: 'yellow',
@@ -103,8 +102,8 @@ const Reservations = (props) => {
                     color="orange"
                     onPress={getDates}
                 />
-
-                {selected && <Text>{selected}</Text>}
+                {selected !== null && <Text>{selected}</Text>}
+                {items !== null && <Text>{items}</Text>}
             </Fragment>
         </SafeAreaView>
     );

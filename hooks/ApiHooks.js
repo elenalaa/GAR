@@ -86,13 +86,11 @@ const postStore = async (newItem, url, category) => {
                 category: category,
             })
             .then(() => {
-                
                 console.log('Post Added!');
             })
         return task;
     } catch (e) {
         console.log(e)
-        
     }
 }
 

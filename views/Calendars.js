@@ -20,24 +20,9 @@ const Calendars = (props) => {
   //const renderCalendarWithSelectableDate = () => {
   return (
     <Fragment>
-      <Text style={styles.text}>Calendar with selectable date</Text>
-      <CalendarList
-        current={'2021-04-28'}
-        horizontal={true}
-        style={styles.calendar}
-        onDayPress={onDayPress}
-        markedDates={{
-          [selected]: {
-            selected: true,
-            disableTouchEvent: true,
-            selectedColor: 'orange',
-            selectedTextColor: 'red'
-          }
-        }}
-      />
-      {/**  <Text style={styles.text}>Calendar with week numbers</Text>
+      <Text style={styles.text}>Calendar!</Text>
       <Calendar style={styles.calendar} hideExtraDays showWeekNumbers />
-      */}
+
     </Fragment>
 
   );

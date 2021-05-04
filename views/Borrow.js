@@ -59,7 +59,7 @@ const Borrow = (props) => {
                     color="orange"
                     onPress={doBorrow}
                 />
-                {selected && <Text>{selected}</Text>}
+                {selected !== null && <Text>{selected}</Text>}
             </Fragment>
         </SafeAreaView>
     );
