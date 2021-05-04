@@ -86,13 +86,11 @@ const postStore = async (newItem, url, category) => {
                 category: category,
             })
             .then(() => {
-                
                 console.log('Post Added!');
             })
         return task;
     } catch (e) {
         console.log(e)
-        throw new Error(e.title)
     }
 }
 
@@ -205,8 +203,6 @@ const getReservations = async (product) => {
     const dates = [];
     try {
 
-
-
         docRef.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 //console.log(doc.id, " => ", doc.data());
@@ -220,5 +216,7 @@ const getReservations = async (product) => {
     }
 
 }
+
+
 
 export {doLogin, doRegister, postStore, postWishImg, postItem, postWishStore, postReservation, getReservations, postRegister};

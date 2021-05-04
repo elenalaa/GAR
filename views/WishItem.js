@@ -8,28 +8,28 @@ import {Card, CardItem, Content, Container} from 'react-native-elements';
 const WishItem = (props) => {
   const item = props.route.params.item;
 
-  
-return (
+
+  return (
 
     //<SafeAreaView style={styles.container}>
     <Card>
       <Card.Title>Wish Item detail</Card.Title>
-      <Card.Divider/>
-         <Image
-          style={styles.logo}
-          resizeMode="cover"
-          source={{uri: item.url}}
-        />
-      
+      <Card.Divider />
+      <Image
+        style={styles.logo}
+        resizeMode="cover"
+        source={{uri: item.url}}
+      />
+
       <View style={styles.textbox}>
         {/* <Text>description</Text> */}
         <Text style={styles.listTitle}>{item.title}</Text>
         <Text>{item.description}</Text>
       </View>
       <View style={styles.view}>
-        
+
       </View>
-</Card>
+    </Card>
     //</SafeAreaView>
   );
 };

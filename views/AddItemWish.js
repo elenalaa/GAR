@@ -64,8 +64,8 @@ const AddItemWish = (props) => {
 
   useEffect(() => {
     getPermissionAsync();
-  }
-  );
+  }, []);
+
 
   const pickImage = async () => {
     // toimii
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     color: '#124191',
-    
+
   },
 
 

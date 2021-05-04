@@ -12,8 +12,8 @@ const Product = (props) => {
   return (
     <Card>
       <Card.Title>Item detail</Card.Title>
-        <Card.Divider/>
-        <View>
+      <Card.Divider />
+      <View>
         <Image
           style={styles.logo}
           resizeMode='cover'
@@ -26,18 +26,19 @@ const Product = (props) => {
         <Text>{item.cstegory}</Text>
       </View>
       <View style={styles.view}>
+
         {item.category == 'Reservation' &&
           <Button style={styles.button}
             title="Reservations"
             color="orange"
             onPress={
-              () => navigation.navigate('Reservations', {item: item})
+              () => {navigation.navigate('Reservations', {item: item})}
             }
           />}
         {item.category == 'Borrow' &&
           <Button style={styles.button}
             title="Borrow"
-            onPress={() => navigation.navigate('Borrow', {item: item})
+            onPress={() => {navigation.navigate('Borrow', {item: item})}
             }
           />}
         {item.category == 'Free Use' &&
